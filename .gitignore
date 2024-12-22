@@ -9,4 +9,4 @@ logs
 *.log
 npm-debug.log*
 # OS
-.DS_Store why we have these code in root .gitignore?
+.DS_Store
