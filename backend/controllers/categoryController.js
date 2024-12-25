@@ -23,7 +23,6 @@ const createCategory = asyncHandler(async (req, res) => {
     res.json(category)
 
   } catch (error) {
-
     console.log(error);
     // Return 400 with error details
     return res.status(400).json(error);
@@ -50,10 +49,8 @@ const updateCategory = asyncHandler(async (req, res) => {
     const updatedCategory = await category.save()
     res.json(updatedCategory)
   } catch (error) {
-
     console.error(error)
     return res.status(500).json({ error: "Internet server error" })
-
   }
 })
 
@@ -63,12 +60,23 @@ const removeCategory = asyncHandler(async (req, res) => {
     // Find the category by Id
     const removed = await Category.findByIdAndDelete(req.params.categoryId)
     res.json(removed)
-
   } catch (error) {
     console.error(error)
     return res.status(500).json({ error: "Internet server error" })
   }
-
 })
 
-export { createCategory, updateCategory, removeCategory };
+// List category function
+const listCategory = asyncHandler(async (req, res) => {
+  try {
+    const all = await Category.find({})
+    res.json(all)
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json(error.message);
+  }
+})
+
+
+
+export { createCategory, updateCategory, removeCategory, listCategory };
