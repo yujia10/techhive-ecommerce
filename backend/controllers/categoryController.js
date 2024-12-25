@@ -57,4 +57,18 @@ const updateCategory = asyncHandler(async (req, res) => {
   }
 })
 
-export { createCategory, updateCategory };
+// Delete category function
+const removeCategory = asyncHandler(async (req, res) => {
+  try {
+    // Find the category by Id
+    const removed = await Category.findByIdAndDelete(req.params.categoryId)
+    res.json(removed)
+
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({ error: "Internet server error" })
+  }
+
+})
+
+export { createCategory, updateCategory, removeCategory };

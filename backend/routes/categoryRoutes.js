@@ -3,10 +3,12 @@ const router = express.Router();
 
 import {
   createCategory,
-  updateCategory
+  updateCategory,
+  removeCategory,
 } from "../controllers/categoryController.js";
 
 router.route("/").post(createCategory);
 router.route("/:categoryId").put(updateCategory);
+router.route("/:categoryId").delete(removeCategory);
 
 export default router
