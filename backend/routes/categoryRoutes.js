@@ -6,11 +6,16 @@ import {
   updateCategory,
   removeCategory,
   listCategory,
+  readCategory,
 } from "../controllers/categoryController.js";
 
-router.route("/").post(createCategory);
-router.route("/:categoryId").put(updateCategory);
-router.route("/:categoryId").delete(removeCategory);
 router.route("/categories").get(listCategory)
+router.route("/").post(createCategory);
+router.route("/:categoryId")
+  .get(readCategory)
+  .put(updateCategory)
+  .delete(removeCategory);
+
+
 
 export default router

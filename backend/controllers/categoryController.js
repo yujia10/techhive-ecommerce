@@ -77,6 +77,29 @@ const listCategory = asyncHandler(async (req, res) => {
   }
 })
 
+// Read a single category function
+const readCategory = asyncHandler(async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+    const category = await Category.findOne({ _id: categoryId })
 
+    // Return the category if is found
+    if (category) {
+      res.json(category);
+    } else {
+      // If no category is found, return error message
+      res.status(404).json({ message: "Category is not found!" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json(error.message);
+  }
+})
 
-export { createCategory, updateCategory, removeCategory, listCategory };
+export {
+  createCategory,
+  updateCategory,
+  removeCategory,
+  listCategory,
+  readCategory,
+};
