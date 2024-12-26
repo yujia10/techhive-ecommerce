@@ -1,12 +1,12 @@
 import jwt from 'jsonwebtoken'
-import User from '../models/userModel'
-import asyncHandler from './asyncHandler';
+import User from '../models/userModel.js'
+import asyncHandler from './asyncHandler.js';
 
 const authenticate = asyncHandler(async (req, res,next) => {
   let token;
 
   // Read jwt from the 'jwt' cookie
-  token = req.cookie.jwt
+  token = req.cookies.jwt
 
   if (token) {
     try {
