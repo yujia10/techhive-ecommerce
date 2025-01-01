@@ -10,8 +10,13 @@ import {
  import { Link } from "react-router-dom";
  import { useNavigate } from "react-router-dom";
  import "./Navigation.css";
+ import { useSelector,useDispatch } from "react-redux";
+ import { useLoginMutation } from "../../redux/api/usersApiSlice.js";
+ import {logout} from "../../redux/features/auth/authSlice.js"
 
 const Navigation = () => {
+  const {userInfo} = useSelector(state => state.auth);
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -26,6 +31,21 @@ const Navigation = () => {
   const closeSidebar = () => {
     setShowSidebar(false)
   };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLoginMutation();
+
+  const logoutHandler = async() => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/login");
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div
@@ -66,6 +86,14 @@ const Navigation = () => {
             <FaHeart className="mr-2 mt-[3rem]" size={26} />
             <span className="hidden nav-item-name mt-[3rem]">Favorites</span>{" "}
           </Link>
+        </div>
+
+        <div className="relative">
+          <button
+            onClick={toggleDropdown}
+            className = "flex items-center text-gray-8000 focus:outline-none"
+          > {userInfo ? (<span className="text-white">{userInfo.username}</span>) : (<></>)}
+          </button>
         </div>
 
         <ul>
