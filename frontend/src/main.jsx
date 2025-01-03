@@ -10,11 +10,19 @@ import store from './redux/store.js';
 import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
 
+import AdminRoute from './pages/Admin/AdminRoute.jsx';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element = {<App/>}>
       <Route path='/login' element = {<Login />} />
       <Route path='/register' element = {<Register />} />
+
+      {/* Admin Routes */}
+      <Route path='/admin' element={<AdminRoute />}>
+
+      </Route>
+
     </Route>
   )
 )
