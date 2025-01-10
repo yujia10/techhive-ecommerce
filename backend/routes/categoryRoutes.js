@@ -9,13 +9,13 @@ import {
   readCategory,
 } from "../controllers/categoryController.js";
 
+import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
+
 router.route("/categories").get(listCategory)
-router.route("/").post(createCategory);
+router.route("/").post(authenticate, authorizeAdmin, createCategory);
 router.route("/:categoryId")
   .get(readCategory)
-  .put(updateCategory)
-  .delete(removeCategory);
-
-
+  .put(authenticate, authorizeAdmin, updateCategory)
+  .delete(authenticate, authorizeAdmin, removeCategory);
 
 export default router
