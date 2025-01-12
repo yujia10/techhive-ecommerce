@@ -6,11 +6,11 @@ import {
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
-  useFetchCategoryQuery,
+  useFetchCategoriesQuery,
 } from '../../redux/api/categoryApiSlice';
 
 const CategoryList = () => {
-  const { data: categories } = useFetchCategoryQuery();
+  const { data: categories } = useFetchCategoriesQuery();
   const [name, setName] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [updatingName, setUpdatingName] = useState('');
@@ -71,6 +71,23 @@ const CategoryList = () => {
     }
   };
 
+  const handleDeleteCategory = async () => {
+    try {
+      const result = await deleteCategory(selectedCategory._id).unwrap();
+
+      if (result.error) {
+        toast.error(result.error);
+      } else {
+        toast.success(`${result.name} is successfully deleted.`);
+        setSelectedCategory(null);
+        setModalVisible(false);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('Category deletion failed. Please try again!');
+    }
+  };
+
   return (
     <div className="ml-[10rem] flex flex-col md:flex-row">
       {/* AdminMenu */}
@@ -110,6 +127,7 @@ const CategoryList = () => {
             setValue={(value) => setUpdatingName(value)}
             handleSubmit={handleUpdateCategory}
             buttonText="Update"
+            handleDelete={handleDeleteCategory}
           />
         </Modal>
       </div>
