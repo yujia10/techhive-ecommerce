@@ -1,4 +1,4 @@
-const categoryForm = ({
+const CategoryForm = ({
   value,
   setValue,
   handleSubmit,
@@ -16,7 +16,7 @@ const categoryForm = ({
           onChange={(e) => setValue(e.target.value)}
         />
 
-        <div className="flex justfy-between">
+        <div className="flex justify-between">
           <button
             className="bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 
           focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50"
@@ -39,4 +39,4 @@ const categoryForm = ({
   );
 };
 
-export default categoryForm;
+export default CategoryForm;
