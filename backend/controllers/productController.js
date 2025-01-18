@@ -81,7 +81,7 @@ const removeProduct = asyncHandler(async (req, res) => {
   }
 });
 
-// Fetch products function
+// Fetch products as a paginated list matching an optional search keyword
 const fetchProducts = asyncHandler(async (req, res) => {
   try {
     const pageSize = 6;
@@ -109,4 +109,25 @@ const fetchProducts = asyncHandler(async (req, res) => {
   }
 });
 
-export { addProduct, updateProductDetails, removeProduct, fetchProducts };
+// Fetch product by its id
+const fetchProductById = asyncHandler(async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      return res.json(product);
+    } else {
+      res.status(404);
+      throw new Error('Product is not found');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(404).json({ error: 'Product is not found.' });
+  }
+});
+export {
+  addProduct,
+  updateProductDetails,
+  removeProduct,
+  fetchProducts,
+  fetchProductById,
+};
