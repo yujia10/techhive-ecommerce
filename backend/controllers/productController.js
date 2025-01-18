@@ -124,10 +124,25 @@ const fetchProductById = asyncHandler(async (req, res) => {
     res.status(404).json({ error: 'Product is not found.' });
   }
 });
+
+const fetchAllProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find({})
+      .populate('category')
+      .limit(12)
+      .sort({ createdAt: -1 });
+
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.json({ error: 'Server error' });
+  }
+});
 export {
   addProduct,
   updateProductDetails,
   removeProduct,
   fetchProducts,
   fetchProductById,
+  fetchAllProducts,
 };
