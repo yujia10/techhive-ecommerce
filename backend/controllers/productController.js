@@ -117,11 +117,11 @@ const fetchProductById = asyncHandler(async (req, res) => {
       return res.json(product);
     } else {
       res.status(404);
-      throw new Error('Product is not found');
+      throw new Error('Product not found');
     }
   } catch (error) {
     console.error(error);
-    res.status(404).json({ error: 'Product is not found.' });
+    res.status(404).json({ error: 'Product not found.' });
   }
 });
 
@@ -138,6 +138,56 @@ const fetchAllProducts = asyncHandler(async (req, res) => {
     res.json({ error: 'Server error' });
   }
 });
+
+// Add review to a product
+const addProductReview = asyncHandler(async (req, res) => {
+  try {
+    const { rating, comment } = req.body;
+    // Find the product by Id
+    const product = await Product.findById(req.params.id);
+
+    // Check if the product exists
+    if (product) {
+      // Check if the user has already submit the review for the product
+      const alreadyReviewed = product.reviews.find(
+        (r) => r.user.toString() === req.user._id.toString()
+      );
+
+      if (alreadyReviewed) {
+        res.status(400);
+        throw new Error('Product already reviewed!');
+      }
+
+      // Create a new review object
+      const review = {
+        name: req.user.username,
+        rating: Number(rating),
+        comment,
+        user: req.user._id,
+      };
+
+      // Push the new review to reviews array
+      product.reviews.push(review);
+
+      // Update the number of the product's total reviews
+      product.numReviews = product.reviews.length;
+
+      // Recalculate the average rating for the product
+      product.rating =
+        product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        product.reviews.length;
+
+      await product.save();
+      res.status(201).json({ message: 'Review added!' });
+    } else {
+      res.status(404);
+      throw new error('Product not found');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json(error.message);
+  }
+});
 export {
   addProduct,
   updateProductDetails,
@@ -145,4 +195,5 @@ export {
   fetchProducts,
   fetchProductById,
   fetchAllProducts,
+  addProductReview,
 };
