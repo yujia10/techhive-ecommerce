@@ -181,8 +181,20 @@ const addProductReview = asyncHandler(async (req, res) => {
       res.status(201).json({ message: 'Review added!' });
     } else {
       res.status(404);
-      throw new error('Product not found');
+      throw new Error('Product not found');
     }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json(error.message);
+  }
+});
+
+// Fetch top rating products
+const fetchTopProducts = asyncHandler(async (req, res) => {
+  try {
+    // Sort products by rating (descending order) and limit to 4
+    const products = await Product.find({}).sort({ rating: -1 }).limit(4);
+    res.json(products);
   } catch (error) {
     console.error(error);
     res.status(400).json(error.message);
@@ -196,4 +208,5 @@ export {
   fetchProductById,
   fetchAllProducts,
   addProductReview,
+  fetchTopProducts,
 };
