@@ -10,3 +10,6 @@ logs
 npm-debug.log*
 # OS
 .DS_Store
+# Uploaded files
+/uploads/*
+!/uploads/.gitkeep
