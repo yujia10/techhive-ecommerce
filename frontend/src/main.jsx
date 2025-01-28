@@ -8,6 +8,8 @@ import store from './redux/store.js';
 import UserList from './pages/Admin/UserList.jsx';
 import CategoryList from './pages/Admin/CategoryList.jsx';
 import ProductList from './pages/Admin/productList.jsx';
+import AllProducts from './pages/Admin/AllProducts.jsx';
+import ProductUpdate from './pages/Admin/ProductUpdate.jsx';
 // Private Route
 import PrivateRoute from './components/PrivateRoute.jsx';
 
@@ -35,6 +37,9 @@ const router = createBrowserRouter(
         <Route path="userlist" element={<UserList />} />
         <Route path="categorylist" element={<CategoryList />} />
         <Route path="productlist" element={<ProductList />} />
+        <Route path="productlist/:pageNumber" element={<ProductList />} />
+        <Route path="allproductslist" element={<AllProducts />} />
+        <Route path="product/update/:_id" element={<ProductUpdate />} />
       </Route>
     </Route>
   )
