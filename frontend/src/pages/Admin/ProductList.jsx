@@ -130,7 +130,7 @@ const ProductList = () => {
               <div className="one">
                 <label htmlFor="name block">Quantity</label> <br />
                 <input
-                  type="text"
+                  type="number"
                   className="p-4 mb-3 w-[30rem] border rounded-lg bg-[#101011] text-white"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
@@ -160,7 +160,7 @@ const ProductList = () => {
               <div>
                 <label htmlFor="name block">Count In Stock</label> <br />
                 <input
-                  type="text"
+                  type="number"
                   className="p-4 mb-3 w-[30rem] border rounded-lg bg-[#101011] text-white"
                   value={stock}
                   onChange={(e) => setStock(e.target.value)}
