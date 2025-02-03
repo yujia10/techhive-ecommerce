@@ -15,8 +15,6 @@ const ProductUpdate = () => {
 
   const { data: productData } = useGetProductByIdQuery(params._id);
 
-  console.log(productData);
-
   // Initialize state with product data
   const [image, setImage] = useState(productData?.image || '');
   const [name, setName] = useState(productData?.name || '');
@@ -24,7 +22,7 @@ const ProductUpdate = () => {
     productData?.description || ''
   );
   const [price, setPrice] = useState(productData?.price || '');
-  const [category, setCategory] = useState(productData?.category?._id || '');
+  const [category, setCategory] = useState(productData?.category || '');
   const [quantity, setQuantity] = useState(productData?.quantity || '');
   const [brand, setBrand] = useState(productData?.brand || '');
   const [stock, setStock] = useState(productData?.countInStock);
@@ -40,25 +38,19 @@ const ProductUpdate = () => {
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
 
-  //Handle initial category setup
-  useEffect(() => {
-    if (productData?.category?._id) {
-      setCategory(productData.category._id);
-    }
-  }, [productData]);
-
   // Update form fields when product data is available
   useEffect(() => {
     if (productData && productData._id) {
       setName(productData.name);
       setDescription(productData.description);
       setPrice(productData.price);
-      setCategory(productData.category?._id || '');
+      setCategory(productData.category);
       setQuantity(productData.quantity);
       setBrand(productData.brand);
       setImage(productData.image);
     }
   }, [productData]);
+
 
   // Handle image upload
   const uploadFileHandler = async (e) => {
@@ -82,7 +74,7 @@ const ProductUpdate = () => {
       formData.append('name', name);
       formData.append('description', description);
       formData.append('price', price);
-      formData.append('category', category || productData.category._id);
+      formData.append('category', category);
       formData.append('quantity', quantity);
       formData.append('brand', brand);
       formData.append('countInStock', stock);
@@ -216,25 +208,18 @@ const ProductUpdate = () => {
 
               {/* Category */}
               <div>
-                <label htmlFor="">Category</label> <br />
-                <select
-                  placeholder="Choose Category"
-                  className="p-4 mb-3 w-[30rem] border rounded-lg bg-[#101011] text-white"
-                  onChange={(e) => setCategory(e.target.value)}
-                  value={category || ''}
-                >
-                  <option value="">Choose Category</option>{' '}
-                  {/* Add default option */}
-                  {categories?.map((c) => (
-                    <option
-                      key={c._id}
-                      value={c._id}
-                      selected={c._id === productData?.category?._id} // Add selected prop
-                    >
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
+                  <label htmlFor="">Category</label> <br />
+                  <select
+                    value={category} // Sets the selected option based on the category ID from state
+                    className="p-4 mb-3 w-[30rem] border rounded-lg bg-[#101011] text-white mr-[5rem]"
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    {categories?.map((c) => (
+                      <option key={c._id} value={c._id}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
               </div>
             </div>
             <div>
