@@ -1,5 +1,6 @@
 import { useGetTopProductsQuery } from "../redux/api/productApiSlice";
 import Loader from "./Loader";
+import SmallProduct from "../pages/Products/SmallProduct";
 
 const Header = () => {
   const {data, isLoading, error} = useGetTopProductsQuery();
@@ -19,7 +20,7 @@ const Header = () => {
           <div className="grid grid-cols-2">
             {data.map((product) => (
               <div key={product._id}>
-               { /* <SmallProduct product={product} /> */}
+               <SmallProduct product={product} />
               </div>
             ))}
           </div>
