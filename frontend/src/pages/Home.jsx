@@ -3,6 +3,7 @@ import { useGetProductsQuery } from "../redux/api/productApiSlice";
 import Header from "../components/Header";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Product from "./Products/Product";
 
 const Home = () => {
   const {keyword} = useParams();
@@ -29,7 +30,7 @@ const Home = () => {
             <div className="flex justify-center flex-wrap mt-[2rem]">
               {data.products.map((product) => (
                 <div key={product._id}>
-                  {/*<Product product={product} />*/}
+                  <Product product={product} />
                 </div>
               ))}
             </div>
