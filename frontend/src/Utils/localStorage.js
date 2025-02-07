@@ -20,5 +20,6 @@ export const removeFavouriteFromLocalStorage = (productId) => {
 // Retrive favourites from a localStorage
 export const getFavouritesFromLocalStorage = () => {
   const favouritesJSON = localStorage.getItem("favourites");
-  return favouritesJSON ? JSON.parse(favouritesJSON) : [];
+  // Filter out any null or undefined values. If there is no data in localStorage, return an empty array.
+  return favouritesJSON ? JSON.parse(favouritesJSON).filter(Boolean) : [];
 };
