@@ -21,11 +21,14 @@ import Profile from './pages/User/Profile.jsx';
 import AdminRoute from './pages/Admin/AdminRoute.jsx';
 import Product from '../../backend/models/productModel';
 
+import Home from './pages/Home.jsx';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route index={true} path="/" element={<Home />} />
 
       {/* Registered users */}
       <Route path="" element={<PrivateRoute />}>
