@@ -148,6 +148,23 @@ const ProductTabs = ({
         )}
       </section>
 
+      {/* Content under the third tab */}
+      <section>
+        {activeTab === 3 && (
+          <section className="ml-[4rem] flex flex-wrap">
+            {!data ? (
+              <Loader />
+            ) : (
+              data.map((product) => (
+                <div key={product._id}>
+                  <SmallProduct product={product} />
+                </div>
+              ))
+            )}
+          </section>
+        )}
+      </section>
+
     </div>
   )
 }
