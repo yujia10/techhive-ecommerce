@@ -117,6 +117,37 @@ const ProductTabs = ({
           </div>
         )}
       </section>
+
+      {/* Content under the second tab */}
+      <section>
+        {activeTab === 2 && (
+          <>
+            <div>
+              {product.reviews.length === 0 && <p>No Reviews</p>}
+            </div>
+
+            <div>
+              {product.reviews.map((review) => (
+                <div
+                  key={review._id}
+                  className="bg-[#1A1A1A] p-4 rounded-lg xl:ml-[2rem] sm:ml-[0rem] xl:w-[50rem] sm:w-[24rem] mb-5"
+                >
+                <div className="flex justify-between">
+                  <strong className="text-[#B0B0B0]">{review.name}</strong>
+                  <p className="text-[#B0B0B0]">
+                    {review.createdAt.substring(0, 10)}
+                  </p>
+                </div>
+
+                <p className="my-4">{review.comment}</p>
+                <Ratings value={review.rating} />
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+
     </div>
   )
 }
