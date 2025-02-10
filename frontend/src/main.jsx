@@ -23,6 +23,7 @@ import Product from '../../backend/models/productModel';
 
 import Home from './pages/Home.jsx';
 import Favourites from './pages/Products/Favourites.jsx';
+import ProductDetails from './pages/Products/ProductDetails.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path="/register" element={<Register />} />
       <Route index={true} path="/" element={<Home />} />
       <Route path="/favourite" element={<Favourites />} />
+      <Route path="/product/:id" element={<ProductDetails />} />
 
       {/* Registered users */}
       <Route path="" element={<PrivateRoute />}>
