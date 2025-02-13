@@ -22,14 +22,19 @@ const cartSlice = createSlice({
 			if (existItem) {
 				// Map through the cartItems and update the existing item
 				state.cartItems = state.cartItems.map((x) =>
-					x._id === existItem._id ? item : x
+					x._id === existItem._id
+						? {
+								...existItem, // Keep existing item properties
+								qty: Number(existItem.qty) + Number(item.qty), // Add new quantity to existing
+						  }
+						: x
 				);
 			} else {
 				// If the item doesn't exist in the cart, add it to the cart
 				state.cartItems = [...state.cartItems, item];
 			}
 
-			return updateCart(state, item);
+			return updateCart(state);
 		},
 
 		removeFromCart: (state, action) => {
