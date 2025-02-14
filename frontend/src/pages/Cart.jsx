@@ -33,8 +33,11 @@ const Cart = () => {
 			<div className="container flex justify-around items-start wrap mx-auto mt-8">
 				{/* Empty Cart State */}
 				{cartItems.length === 0 ? (
-					<div>
-						Your cart is empty <Link to="/shop">Go To Shop</Link>
+					<div className="text-2xl font-bold">
+						Your cart is empty -{' '}
+						<Link to="/shop" className="underline">
+							Go To Shop
+						</Link>
 					</div>
 				) : (
 					<>
@@ -104,6 +107,61 @@ const Cart = () => {
 									</div>
 								</div>
 							))}
+
+							{/* Order Summary and Checkout Section */}
+							<div className="mt-8 w-[40rem]">
+								<div className="p-4 rounded-lg bg-[#1A1A1A]">
+									<h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+									{/* Items total quantity and price */}
+									<div className="flex justify-between mb-3">
+										<span>
+											Items (
+											{cartItems.reduce((acc, item) => acc + item.qty, 0)}):
+										</span>
+										<span>$ {cart.itemsPrice}</span>
+									</div>
+									{/* Shipping Estimate */}
+									<div className="flex justify-between mb-3">
+										<span>Estimated Shipping:</span>
+										<span>
+											{Number(cart.itemsPrice) > 100
+												? 'FREE'
+												: `$${cart.shippingPrice}`}
+										</span>
+									</div>
+									{/* Divider Line */}
+									<div className="border-t border-gray-600 my-4"></div>
+									{/* Total Price (include shipping fee) */}
+									<div className="flex justify-between mb-4">
+										<span className="text-lg font-semibold">Order Total:</span>
+										<span className="text-lg font-bold text-pink-500">
+											$ {cart.totalPrice}
+										</span>
+									</div>
+									{/* Checkout Button */}
+									<button
+										className="bg-pink-500 py-2 px-4 rounded-full text-lg w-full hover:bg-pink-600 transition-colors"
+										disabled={cartItems.length === 0}
+										onClick={checkoutHandler}
+									>
+										CONTINUE TO CHECKOUT
+									</button>
+									{/* Free Shipping Notice (display if total items price less than 100) */}
+									<div className="text-sm text-gray-400 mt-3 text-center">
+										{cartItems.reduce(
+											(acc, item) => acc + item.price * item.qty,
+											0
+										) < 100 &&
+											`Add $ ${(
+												100 -
+												cartItems.reduce(
+													(acc, item) => acc + item.price * item.qty,
+													0
+												)
+											).toFixed(2)} more for free shipping`}
+									</div>
+								</div>
+							</div>
 						</div>
 					</>
 				)}
