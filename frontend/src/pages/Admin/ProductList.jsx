@@ -75,7 +75,7 @@ const ProductList = () => {
     <div className="container xl:mx-[9rem] sm:mx-[0]">
       <div className="flex flex-col md:flex-row">
         <AdminMenu />
-        <div className="md:w-3/4 p-3">
+        <div className="p-3">
           <div className="h-12">Create Product</div>
 
           {/* Image Preview */}
@@ -105,7 +105,7 @@ const ProductList = () => {
 
           <div className="p-3">
             {/* Form container */}
-            <div className="flex flex-wrap">
+            <div className="flex justify-between">
               <div className="one">
                 <label htmlFor="name">Name</label> <br />
                 <input
@@ -126,7 +126,7 @@ const ProductList = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap">
+            <div className="flex justify-between">
               <div className="one">
                 <label htmlFor="name block">Quantity</label> <br />
                 <input
@@ -150,7 +150,7 @@ const ProductList = () => {
             <div className="mb-3">
               <label htmlFor="description">Description</label>
               <textarea
-                className="p-2 mb-3 bg-[#101011] border rounded-lg w-[95%] text-white"
+                className="p-2 mb-3 bg-[#101011] border rounded-lg w-[100%] text-white"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
@@ -167,7 +167,7 @@ const ProductList = () => {
                 />
               </div>
 
-              <div>
+              <div className="ml-10">
                 <label htmlFor="">Category</label> <br />
                 <select
                   placeholder="Choose Category"
