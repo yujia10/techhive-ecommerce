@@ -1,7 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
-import { addToCart, removeFromCart } from '../redux/features/cart/cartSlice';
+import {
+	updateCartItemQty,
+	removeFromCart,
+} from '../redux/features/cart/cartSlice';
 
 const Cart = () => {
 	const navigate = useNavigate();
@@ -11,8 +14,8 @@ const Cart = () => {
 	const { cartItems } = cart;
 
 	// Handler to update the item quantity in cart
-	const addToCartHandler = async (product, qty) => {
-		dispatch(addToCart({ ...product, qty }));
+	const updateQtyHandler = (id, qty) => {
+		dispatch(updateCartItemQty({ id, qty }));
 	};
 
 	// Handler to remove items from cart
@@ -77,7 +80,7 @@ const Cart = () => {
 											className="w-full p-1 border rounded bg-black text-white"
 											value={item.qty}
 											onChange={(e) =>
-												addToCartHandler(item, Number(e.target.value))
+												updateQtyHandler(item._id, Number(e.target.value))
 											}
 										>
 											{[...Array(item.countInStock).keys()].map((x) => (

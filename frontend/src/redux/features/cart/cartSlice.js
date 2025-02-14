@@ -37,6 +37,21 @@ const cartSlice = createSlice({
 			return updateCart(state);
 		},
 
+		updateCartItemQty: (state, action) => {
+			const { id, qty } = action.payload;
+
+			state.cartItems = state.cartItems.map((x) =>
+				x._id === id
+					? {
+							...x,
+							qty: Number(qty),
+					  }
+					: x
+			);
+
+			return updateCart(state);
+		},
+
 		removeFromCart: (state, action) => {
 			state.cartItems = state.cartItems.filter((x) => x._id != action.payload);
 			return updateCart(state);
@@ -65,6 +80,7 @@ const cartSlice = createSlice({
 
 export const {
 	addToCart,
+	updateCartItemQty,
 	removeFromCart,
 	savePaymentMethod,
 	saveShippingAddress,
