@@ -49,7 +49,7 @@ const Register = () => {
   };
 
   return (
-    <section className="pl-[10rem] flex flex-wrap">
+    <section className="pl-[10rem] flex">
       <div className="mr-[4rem] mt-[5rem]">
         <h1 className="text-2xl font-semibold mb-4">Register</h1>
 
@@ -141,6 +141,11 @@ const Register = () => {
           </p>
         </div>
       </div>
+      <img
+        src="https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80"
+        alt=""
+        className="h-[65rem] w-[59%] xl:block md:hidden sm:hidden rounded-lg"
+      />
     </section>
   );
 };
