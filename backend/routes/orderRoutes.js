@@ -7,7 +7,8 @@ import {
   getUserOrders,
   countTotalOrders,
   calculateTotalSales,
-  calcualteTotalSalesByDate } from "../controllers/orderController.js";
+  calcualteTotalSalesByDate,
+  findOrderById } from "../controllers/orderController.js";
 
 import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
 
@@ -19,5 +20,6 @@ router.route("/mine").get(authenticate, getUserOrders);
 router.route("/total-orders").get(countTotalOrders);
 router.route("/total-sales").get(calculateTotalSales);
 router.route("/total-sales-by-date").get(calcualteTotalSalesByDate);
+router.route("/:id").get(authenticate, findOrderById);
 
 export default router;
