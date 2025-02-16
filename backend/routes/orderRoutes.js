@@ -6,7 +6,8 @@ import {
   getAllOrders,
   getUserOrders,
   countTotalOrders,
-  calculateTotalSales } from "../controllers/orderController.js";
+  calculateTotalSales,
+  calcualteTotalSalesByDate } from "../controllers/orderController.js";
 
 import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
 
@@ -17,5 +18,6 @@ router.route("/")
 router.route("/mine").get(authenticate, getUserOrders);
 router.route("/total-orders").get(countTotalOrders);
 router.route("/total-sales").get(calculateTotalSales);
+router.route("/total-sales-by-date").get(calcualteTotalSalesByDate);
 
 export default router;
