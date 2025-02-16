@@ -110,6 +110,35 @@ const Shop = () => {
 								</div>
 							))}
 						</div>
+
+						<h2 className="h4 tetx-center py-2 bg-black rounded-full mb-2">
+							Filter by Brands
+						</h2>
+
+						{/* Brands Radio Button List */}
+						<div className="p-5">
+							{uniqueBrands.map((brand) => (
+								<>
+									<div className="flex items-center mr-4 mb-5">
+										<input
+											type="radio"
+											id={brand}
+											name="brand"
+											onChange={() => handleBrandClick(brand)}
+											className="w-4 h-4 text-pink-400 bg-gray-100 border-gray-300
+											 focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 
+											 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+										/>
+										<label
+											htmlFor="pink-radio"
+											className="ml-2 text-sm font-medium text-white dark:text-gray-300"
+										>
+											{brand}
+										</label>
+									</div>
+								</>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
