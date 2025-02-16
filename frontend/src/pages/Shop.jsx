@@ -11,7 +11,7 @@ import Loader from '../components/Loader';
 
 const Shop = () => {
 	const dispatch = useDispatch();
-	const { categories, productes, checked, radio } = useSelector(
+	const { categories, products, checked, radio } = useSelector(
 		(state) => state.shop
 	);
 	const categoriesQuery = useFetchCategoriesQuery();
@@ -83,7 +83,9 @@ const Shop = () => {
 		<>
 			<div className="container mx-auto">
 				<div className="flex md:flex-row">
+					{/* Filtering Sidebar */}
 					<div className="bg-[151515] p-3 mt-2 mb-2">
+						{/* Categories Filter Section */}
 						<h2 className="h4 tetx-center py-2 bg-black rounded-full mb-2">
 							Filter by Categories
 						</h2>
@@ -111,6 +113,7 @@ const Shop = () => {
 							))}
 						</div>
 
+						{/* Brands Filter Section */}
 						<h2 className="h4 tetx-center py-2 bg-black rounded-full mb-2">
 							Filter by Brands
 						</h2>
@@ -118,26 +121,59 @@ const Shop = () => {
 						{/* Brands Radio Button List */}
 						<div className="p-5">
 							{uniqueBrands.map((brand) => (
-								<>
-									<div className="flex items-center mr-4 mb-5">
-										<input
-											type="radio"
-											id={brand}
-											name="brand"
-											onChange={() => handleBrandClick(brand)}
-											className="w-4 h-4 text-pink-400 bg-gray-100 border-gray-300
+								<div className="flex items-center mr-4 mb-5">
+									<input
+										type="radio"
+										id={brand}
+										name="brand"
+										onChange={() => handleBrandClick(brand)}
+										className="w-4 h-4 text-pink-400 bg-gray-100 border-gray-300
 											 focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 
 											 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-										/>
-										<label
-											htmlFor="pink-radio"
-											className="ml-2 text-sm font-medium text-white dark:text-gray-300"
-										>
-											{brand}
-										</label>
-									</div>
-								</>
+									/>
+									<label
+										htmlFor="pink-radio"
+										className="ml-2 text-sm font-medium text-white dark:text-gray-300"
+									>
+										{brand}
+									</label>
+								</div>
 							))}
+						</div>
+
+						{/* Price Filter Section */}
+						<h2 className="h4 tetx-center py-2 bg-black rounded-full mb-2">
+							Filter by Price
+						</h2>
+						{/* Price filter input */}
+						<div className="p-5 w-[15rem]">
+							<input
+								type="text"
+								placeholder="Enter Price"
+								value={priceFilter}
+								onChange={handlePriceChange}
+								className="w-full px-3 py-2 
+								bg-white/10 
+								text-white  
+								placeholder-gray-400  
+								border border-white/20  
+								rounded-lg  
+								focus:outline-none  
+								focus:ring-2  
+								focus:ring-pink-500  
+								focus:border-transparent"
+							/>
+						</div>
+
+						{/* Reset Button */}
+						<div className="p-5 pt-0">
+							<button
+								className="w-full border rounded border-white/20 bg-white/10 text-white hover:bg-white/20 my-4"
+								// Reload the page to reset all filters
+								onClick={() => window.location.reload()}
+							>
+								Reset
+							</button>
 						</div>
 					</div>
 				</div>
