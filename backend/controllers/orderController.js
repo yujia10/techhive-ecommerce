@@ -86,4 +86,13 @@ const createOrder = async (req,res) => {
   }
 };
 
-export {createOrder};
+const getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({}).populate("user", "id username");
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({error: error.message})
+  }
+}
+
+export {createOrder, getAllOrders};
