@@ -88,6 +88,7 @@ const createOrder = async (req,res) => {
 
 const getAllOrders = async (req, res) => {
   try {
+    // Fetch all orders and populate the 'user' field with only 'id' and 'username'
     const orders = await Order.find({}).populate("user", "id username");
     res.json(orders);
   } catch (error) {
@@ -113,4 +114,14 @@ const countTotalOrders = async (req, res) => {
   }
 };
 
-export {createOrder, getAllOrders, getUserOrders, countTotalOrders};
+const calculateTotalSales = async (req, res) => {
+  try {
+    const orders = await Order.find();
+    const totalSales = orders.reduce((sum, order) => sum + order.totalPrice, 0);
+    res.json({ totalSales });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export {createOrder, getAllOrders, getUserOrders, countTotalOrders, calculateTotalSales};
