@@ -132,4 +132,5 @@ export const {
 	useCreateReviewMutation,
 	useGetTopProductsQuery,
 	useGetNewProductsQuery,
+	useGetFilteredProductsQuery,
 } = productApiSlice;
