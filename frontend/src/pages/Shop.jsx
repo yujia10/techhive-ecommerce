@@ -8,6 +8,7 @@ import {
 	setChecked,
 } from '../redux/features/shop/shopSlice';
 import Loader from '../components/Loader';
+import ProductCard from './Products/ProductCard';
 
 const Shop = () => {
 	const dispatch = useDispatch();
@@ -174,6 +175,25 @@ const Shop = () => {
 							>
 								Reset
 							</button>
+						</div>
+					</div>
+
+					{/* Products Display Section */}
+					<div className="p-3">
+						<h2 className="h4 text-center mb-2 text-gray-300">
+							{products?.length} Products
+						</h2>
+						<div className="flex flex-wrap">
+							{/* Show loader if no products, otherwise display products */}
+							{products.length === 0 ? (
+								<Loader />
+							) : (
+								products?.map((p) => (
+									<div className="p-3" key={p._id}>
+										<ProductCard p={p} />
+									</div>
+								))
+							)}
 						</div>
 					</div>
 				</div>
