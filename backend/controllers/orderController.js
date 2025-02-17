@@ -9,14 +9,10 @@ function calcPrices(orderItems) {
 	);
 
 	const shippingPrice = itemsPrice > 100 ? 0 : 10;
-	const taxRate = 0.15;
-	const taxPrice = (itemsPrice * taxRate).toFixed(2);
+	const taxRate = 0.1; // 10% for Australian GST
+	const taxPrice = ((itemsPrice / (1 + taxRate)) * taxRate).toFixed(2); // Calculate GST component
 
-	const totalPrice = (
-		itemsPrice +
-		shippingPrice +
-		parseFloat(taxPrice)
-	).toFixed(2);
+	const totalPrice = (itemsPrice + shippingPrice).toFixed(2); // Total price already includes GST
 
 	return {
 		itemsPrice: itemsPrice.toFixed(2),
