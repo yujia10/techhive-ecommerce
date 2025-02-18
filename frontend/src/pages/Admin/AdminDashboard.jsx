@@ -63,6 +63,30 @@ const AdminDashboard = () => {
     series: [{ name: "Sales", data: [] }],
   });
 
+  useEffect(() => {
+    if (salesDetail) {
+      // Format sales data for the chart
+      const formattedSalesDate = salesDetail.map((item) => ({
+        x: item._id,
+        y: item.totalSales,
+      }));
+
+      setState((prevState) => ({
+        ...prevState,
+        options: {
+          ...prevState.options,
+          xaxis: {
+            categories: formattedSalesDate.map((item) => item.x), // Set X-axis labels
+          },
+        },
+
+        series: [
+          { name: "Sales", data: formattedSalesDate.map((item) => item.y) }, // Set Y-axis data
+        ],
+      }));
+    }
+  }, [salesDetail]); // Runs when salesDetail changes
+
   return (
     <div>AdminDashboard</div>
   )
