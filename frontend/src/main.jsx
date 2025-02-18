@@ -30,6 +30,7 @@ import ProductDetails from './pages/Products/ProductDetails.jsx';
 
 import Cart from './pages/Cart.jsx';
 import Shop from './pages/Shop.jsx';
+import AdminDashboard from './pages/Admin/AdminDashboard.jsx';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -55,6 +56,7 @@ const router = createBrowserRouter(
 				<Route path="productlist/:pageNumber" element={<ProductList />} />
 				<Route path="allproductslist" element={<AllProducts />} />
 				<Route path="product/update/:_id" element={<ProductUpdate />} />
+        <Route path="dashboard" element={<AdminDashboard />} />
 			</Route>
 		</Route>
 	)
