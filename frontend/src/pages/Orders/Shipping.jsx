@@ -6,6 +6,8 @@ import {
 	savePaymentMethod,
 } from '../../redux/features/cart/cartSlice';
 
+import ProgressSteps from '../../components/ProgressSteps';
+
 const Shipping = () => {
 	const cart = useSelector((state) => state.cart);
 	const { shippingAddress } = cart;
@@ -21,6 +23,14 @@ const Shipping = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	// Form submission handler
+	const submitHandler = (e) => {
+		e.preventDefault();
+		dispatch(saveShippingAddress({ address, city, postalCode, country }));
+		dispatch(savePaymentMethod(paymentMethod));
+		navigate('/placeorder');
+	};
+
 	// Payment --- this need check if any possible to have infinite loop?
 	// This is already on the shipping page
 	useEffect(() => {
@@ -30,13 +40,15 @@ const Shipping = () => {
 	}, [navigate, shippingAddress]);
 	return (
 		<div className="container mx-auto mt-10">
-			{/* ProgressSteps step1 step2 */}
+			{/* Progress indicator showing steps completed */}
+			<ProgressSteps step1 step2 />
 			<div className="mt-[10rem] flex justify-around items-center flex-wrap">
-				<form className="w-[40rem]">
+				{/* Shipping information form */}
+				<form onSubmit={submitHandler} className="w-[40rem]">
 					<h1 className="text-2xl font-semibold mb-4">Shipping</h1>
 					{/* Address */}
 					<div className="mb-4">
-						<lable className="block text-white mb-2">Address</lable>
+						<label className="block text-white mb-2">Address</label>
 						<input
 							type="text"
 							className="w-full p-2 border rounded"
@@ -49,7 +61,7 @@ const Shipping = () => {
 
 					{/* City */}
 					<div className="mb-4">
-						<lable className="block text-white mb-2">City</lable>
+						<label className="block text-white mb-2">City</label>
 						<input
 							type="text"
 							className="w-full p-2 border rounded"
@@ -62,7 +74,7 @@ const Shipping = () => {
 
 					{/* Postal Code */}
 					<div className="mb-4">
-						<lable className="block text-white mb-2">Postal Code</lable>
+						<label className="block text-white mb-2">Postal Code</label>
 						<input
 							type="text"
 							className="w-full p-2 border rounded"
@@ -75,7 +87,7 @@ const Shipping = () => {
 
 					{/* Country */}
 					<div className="mb-4">
-						<lable className="block text-white mb-2">Country</lable>
+						<label className="block text-white mb-2">Country</label>
 						<input
 							type="text"
 							className="w-full p-2 border rounded"
@@ -86,7 +98,7 @@ const Shipping = () => {
 						/>
 					</div>
 
-					{/* Payment Method */}
+					{/* Payment Method selection */}
 					<div className="mb-4">
 						<lable className="block text-gray-400">Select Payment Method</lable>
 						<div className="mt-2">
@@ -104,6 +116,7 @@ const Shipping = () => {
 						</div>
 					</div>
 
+					{/* Submit button */}
 					<button
 						className="bg-pink-500 text-white py-2 px-4 rounded-full text-lg w-full"
 						type="submit"
