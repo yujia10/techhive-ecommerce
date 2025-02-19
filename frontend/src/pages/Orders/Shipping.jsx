@@ -1,7 +1,119 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+	saveShippingAddress,
+	savePaymentMethod,
+} from '../../redux/features/cart/cartSlice';
 
 const Shipping = () => {
-	return <div>Shipping</div>;
+	const cart = useSelector((state) => state.cart);
+	const { shippingAddress } = cart;
+
+	const [paymentMethod, setPaymentMethod] = useState('PayPal');
+	const [address, setAddress] = useState(shippingAddress.address || '');
+	const [city, setCity] = useState(shippingAddress.city || '');
+	const [postalCode, setPostalCode] = useState(
+		shippingAddress.postalCode || ''
+	);
+	const [country, setCountry] = useState(shippingAddress.country || '');
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	// Payment --- this need check if any possible to have infinite loop?
+	// This is already on the shipping page
+	useEffect(() => {
+		if (!shippingAddress.address) {
+			navigate('/shipping');
+		}
+	}, [navigate, shippingAddress]);
+	return (
+		<div className="container mx-auto mt-10">
+			{/* ProgressSteps step1 step2 */}
+			<div className="mt-[10rem] flex justify-around items-center flex-wrap">
+				<form className="w-[40rem]">
+					<h1 className="text-2xl font-semibold mb-4">Shipping</h1>
+					{/* Address */}
+					<div className="mb-4">
+						<lable className="block text-white mb-2">Address</lable>
+						<input
+							type="text"
+							className="w-full p-2 border rounded"
+							placeholder="Enter Address"
+							value={address}
+							required
+							onChange={(e) => setAddress(e.target.value)}
+						/>
+					</div>
+
+					{/* City */}
+					<div className="mb-4">
+						<lable className="block text-white mb-2">City</lable>
+						<input
+							type="text"
+							className="w-full p-2 border rounded"
+							placeholder="Enter City"
+							value={city}
+							required
+							onChange={(e) => setCity(e.target.value)}
+						/>
+					</div>
+
+					{/* Postal Code */}
+					<div className="mb-4">
+						<lable className="block text-white mb-2">Postal Code</lable>
+						<input
+							type="text"
+							className="w-full p-2 border rounded"
+							placeholder="Enter Postal Code"
+							value={postalCode}
+							required
+							onChange={(e) => setPostalCode(e.target.value)}
+						/>
+					</div>
+
+					{/* Country */}
+					<div className="mb-4">
+						<lable className="block text-white mb-2">Country</lable>
+						<input
+							type="text"
+							className="w-full p-2 border rounded"
+							placeholder="Enter Country"
+							value={country}
+							required
+							onChange={(e) => setCountry(e.target.value)}
+						/>
+					</div>
+
+					{/* Payment Method */}
+					<div className="mb-4">
+						<lable className="block text-gray-400">Select Payment Method</lable>
+						<div className="mt-2">
+							<lable className="inline-flex items-center">
+								<input
+									type="radio"
+									className="form-radio text-pink-500"
+									name="paymentMethod"
+									value="PayPal"
+									checked={paymentMethod === 'PayPal'}
+									onChange={(e) => setPaymentMethod(e.target.value)}
+								/>
+								<span className="ml-2">PayPal</span>
+							</lable>
+						</div>
+					</div>
+
+					<button
+						className="bg-pink-500 text-white py-2 px-4 rounded-full text-lg w-full"
+						type="submit"
+					>
+						Continue
+					</button>
+				</form>
+			</div>
+		</div>
+	);
 };
 
 export default Shipping;
