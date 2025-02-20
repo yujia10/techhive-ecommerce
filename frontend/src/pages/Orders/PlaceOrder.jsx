@@ -107,19 +107,21 @@ const PlaceOrder = () => {
 						{/* Price details */}
 						<ul className="text-lg">
 							<li>
-								<span className="font-semibold mb-4">Items:</span>${' '}
+								<span className="font-semibold mb-4">Items:</span> ${' '}
 								{cart.itemsPrice}
 							</li>
 							<li>
-								<span className="font-semibold mb-4">Shipping:</span>${' '}
-								{cart.shippingPrice}
+								<span className="font-semibold mb-4">Shipping:</span>{' '}
+								{Number(cart.shippingPrice) === 0
+									? 'FREE'
+									: `$ ${cart.shippingPrice}`}
 							</li>
 							<li>
-								<span className="font-semibold mb-4">GST(included):</span>${' '}
+								<span className="font-semibold mb-4">GST(included):</span> ${' '}
 								{cart.taxPrice}
 							</li>
 							<li>
-								<span className="font-semibold mb-4">Total:</span>${' '}
+								<span className="font-semibold mb-4">Total:</span> ${' '}
 								{cart.totalPrice}
 							</li>
 						</ul>
