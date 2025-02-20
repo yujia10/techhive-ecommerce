@@ -31,8 +31,7 @@ const Shipping = () => {
 		navigate('/placeorder');
 	};
 
-	// Payment --- this need check if any possible to have infinite loop?
-	// This is already on the shipping page
+	// Payment
 	useEffect(() => {
 		if (!shippingAddress.address) {
 			navigate('/shipping');
