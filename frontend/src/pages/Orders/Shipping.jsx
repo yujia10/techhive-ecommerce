@@ -99,9 +99,9 @@ const Shipping = () => {
 
 					{/* Payment Method selection */}
 					<div className="mb-4">
-						<lable className="block text-gray-400">Select Payment Method</lable>
+						<label className="block text-gray-400">Select Payment Method</label>
 						<div className="mt-2">
-							<lable className="inline-flex items-center">
+							<label className="inline-flex items-center">
 								<input
 									type="radio"
 									className="form-radio text-pink-500"
@@ -111,7 +111,7 @@ const Shipping = () => {
 									onChange={(e) => setPaymentMethod(e.target.value)}
 								/>
 								<span className="ml-2">PayPal</span>
-							</lable>
+							</label>
 						</div>
 					</div>
 
