@@ -2,7 +2,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { Link } from 'react-router-dom';
 import { useGetMyOrdersQuery } from '../../redux/api/orderApiSlice';
-import { FaTable } from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa';
 
 const UserOrders = () => {
 	const { data: orders, isLoading, error } = useGetMyOrdersQuery();
@@ -75,10 +75,10 @@ const UserOrders = () => {
 								</td>
 
 								{/* Order details link */}
-								<td className="py-2 text-center">
+								<td className="p-3 text-center">
 									<Link to={`/order/${order._id}`}>
-										<button className="bg-pink-400 text-black py-2 px-3 rounded">
-											View Details
+										<button className="bg-pink-500 hover:bg-pink-600 text-white py-1 px-4 rounded-md transition duration-200 flex items-center mx-auto">
+											<FaEye className="mr-1" /> View
 										</button>
 									</Link>
 								</td>
