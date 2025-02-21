@@ -30,7 +30,7 @@ const Cart = () => {
 
 	return (
 		<>
-			<div className="container flex justify-around items-start wrap mx-auto mt-8">
+			<div className="container mx-auto mt-8">
 				{/* Empty Cart State */}
 				{cartItems.length === 0 ? (
 					<div className="text-2xl font-bold">
@@ -41,76 +41,79 @@ const Cart = () => {
 					</div>
 				) : (
 					<>
-						{/* Cart Content Container */}
-						<div className="flex flex-col w-[80%]">
-							<h1 className="h1 text-2xl font-semibold mb-4">Shopping Cart</h1>
+						<h1 className="h1 text-2xl font-semibold mb-8">Shopping Cart</h1>
 
-							{/* Cart Items List */}
-							{cartItems.map((item) => (
-								<div
-									key={item._id}
-									className="flex items-center mb-[1rem] pb-2"
-								>
-									{/* Product Image */}
-									<div className="w-[5rem] h-[5rem]">
-										<img
-											src={item.image}
-											alt={item.name}
-											className="w-full h-full object-cover
-								rounded"
-										/>
-									</div>
-
-									{/* Product Details */}
-									<div className="flex-1 ml-4">
-										{/* Name link to product */}
-										<Link
-											to={`/product/${item._id}`}
-											className="text-pink-500 font-semibold"
-										>
-											{item.name}
-										</Link>
-
-										<div className="mt-2 text-white">{item.brand}</div>
-										<div className="mt-2 text-white font-bold">
-											$ {item.price}
+						{/* Main content container - cart items on left, summary on right */}
+						<div className="flex flex-wrap md:flex-nowrap gap-6">
+							{/* Cart Content Container */}
+							<div className="flex flex-col w-full md:w-1/2">
+								<div className="border-b border-gray-700 pb-2 mb-4"></div>
+								{/* Cart Items List */}
+								{cartItems.map((item) => (
+									<div
+										key={item._id}
+										className="flex items-center mb-6 pb-4 border-b border-gray-700"
+									>
+										{/* Product Image */}
+										<div className="w-16 h-16 flex-shrink-0">
+											<Link to={`/product/${item._id}`}>
+												<img
+													src={item.image}
+													alt={item.name}
+													className="w-full h-full object-cover rounded"
+												/>
+											</Link>
 										</div>
-									</div>
 
-									{/* Quantity Selector and Delete Button */}
-									<div className="w-32 flex items-center">
-										<select
-											className="w-full p-1 border rounded bg-black text-white"
-											value={item.qty}
-											onChange={(e) =>
-												updateQtyHandler(item._id, Number(e.target.value))
-											}
-										>
-											{[...Array(item.countInStock).keys()].map((x) => (
-												<option
-													key={x + 1}
-													value={x + 1}
-													className="bg-white text-black"
-												>
-													{x + 1}
-												</option>
-											))}
-										</select>
-										<div>
-											<button
-												className=" text-red-500 ml-4"
-												onClick={() => removeFromCartHandler(item._id)}
+										{/* Product Details */}
+										<div className="flex-1 ml-4">
+											{/* Name link to product */}
+											<Link
+												to={`/product/${item._id}`}
+												className="text-pink-500 font-semibold hover:underline"
 											>
-												<FaTrash className="ml-[1rem] mt-[.5rem]" />
-											</button>
+												{item.name}
+											</Link>
+											<div className="mt-1 text-white">{item.brand}</div>
+											<div className="mt-1 text-white font-bold">
+												$ {item.price}
+											</div>
 										</div>
+
+										{/* Quantity Selector and Delete Button */}
+										<div className="w-32 flex items-center">
+											<select
+												className="w-20 p-1 border rounded bg-black text-white"
+												value={item.qty}
+												onChange={(e) =>
+													updateQtyHandler(item._id, Number(e.target.value))
+												}
+											>
+												{[...Array(item.countInStock).keys()].map((x) => (
+													<option
+														key={x + 1}
+														value={x + 1}
+														className="bg-white text-black"
+													>
+														{x + 1}
+													</option>
+												))}
+											</select>
+										</div>
+										<button
+											className="text-red-500 hover:text-red-400 transition-colors ml-2"
+											onClick={() => removeFromCartHandler(item._id)}
+											aria-label="Remove item"
+										>
+											<FaTrash />
+										</button>
 									</div>
-								</div>
-							))}
+								))}
+							</div>
 
 							{/* Order Summary and Checkout Section */}
-							<div className="mt-8 w-[40rem]">
-								<div className="p-4 rounded-lg bg-[#1A1A1A]">
+							<div className="w-full md:w-1/2">
+								<div className="p-4 rounded-lg bg-[#1A1A1A] h-fit">
 									<h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 									{/* Items total quantity and price */}
 									<div className="flex justify-between mb-3">
