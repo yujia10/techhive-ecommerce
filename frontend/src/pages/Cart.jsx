@@ -25,7 +25,7 @@ const Cart = () => {
 
 	// Handler to checkout - redirects to login if needed
 	const checkoutHandler = () => {
-		navigate('login?redirect=/shipping');
+		navigate('/login?redirect=/shipping');
 	};
 
 	return (
