@@ -107,22 +107,22 @@ const AdminDashboard = () => {
           </div>
           <div className="rounded-lg bg-black p-5 w-[20rem] mt-5">
             <div className="font-bold rounded-full w-[3rem] bg-pink-500 text-center p-3">
-              $
+              C
             </div>
 
             <p className="mt-5">Customers</p>
             <h1 className="text-xl font-bold">
-              $ {isUsersLoading ? <Loader /> : customers?.length}
+              {isUsersLoading ? <Loader /> : customers?.length}
             </h1>
           </div>
           <div className="rounded-lg bg-black p-5 w-[20rem] mt-5">
             <div className="font-bold rounded-full w-[3rem] bg-pink-500 text-center p-3">
-              $
+              O
             </div>
 
             <p className="mt-5">All Orders</p>
             <h1 className="text-xl font-bold">
-              $ {isOrdersLoading ? <Loader /> : orders?.totalOrders}
+              {isOrdersLoading ? <Loader /> : orders?.totalOrders}
             </h1>
           </div>
         </div>
