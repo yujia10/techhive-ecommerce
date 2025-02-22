@@ -106,7 +106,7 @@ const Order = () => {
 						<div className="overflow-x-auto">
 							{/* Order items table */}
 							<table className="w-[80%]">
-								<thead className="border-b-2">
+								<thead>
 									<tr>
 										<th className="p-2">Image</th>
 										<th className="p-2">Product</th>
@@ -115,6 +115,7 @@ const Order = () => {
 										<th className="p-2">Total</th>
 									</tr>
 								</thead>
+
 								<tbody>
 									{/* Map through order items */}
 									{order.orderItems.map((item, index) => (
@@ -124,7 +125,7 @@ const Order = () => {
 													<img
 														src={item.image}
 														alt={item.name}
-														className="w-16 h-16 object-cover"
+														className="w-16 h-16 object-cover rounded"
 													/>
 												</div>
 											</td>
@@ -232,10 +233,10 @@ const Order = () => {
 				{/* Mark as delivered button - admin only, for paid orders */}
 				{loadingDeliver && <Loader />}
 				{userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-					<div>
+					<div className="mt-6">
 						<button
 							type="button"
-							className="bg-pink-500 text-white w-full py-2"
+							className="bg-pink-500 text-white w-full py-2 rounded-full hover:bg-pink-600 transition-colors"
 							onClick={deliverHandler}
 						>
 							Mark as delivered
