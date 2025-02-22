@@ -73,7 +73,7 @@ const PlaceOrder = () => {
 											<img
 												src={item.image}
 												alt={item.name}
-												className="w-16 h-16 object-cover"
+												className="w-16 h-16 object-cover rounded"
 											/>
 										</td>
 										{/* Product Name with link to its details page */}
