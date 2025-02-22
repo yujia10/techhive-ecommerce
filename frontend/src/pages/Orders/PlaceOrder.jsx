@@ -144,14 +144,17 @@ const PlaceOrder = () => {
 							<strong>Method:</strong> {cart.paymentMethod}
 						</div>
 					</div>
+
 					{/* Place order button */}
-					<button
-						className="bg-pink-500 text-white py-2 px-4 rounded-full text-lg w-full mt-4"
-						disabled={cart.cartItems.length === 0}
-						onClick={placeOrderHandler}
-					>
-						Place Order
-					</button>
+					<div className="flex justify-center mt-6">
+						<button
+							className="bg-pink-500 text-white py-2 px-8 rounded-full text-lg hover:bg-pink-600 transition-colors w-1/3 max-w-xs"
+							disabled={cart.cartItems.length === 0}
+							onClick={placeOrderHandler}
+						>
+							Place Order
+						</button>
+					</div>
 
 					{isLoading && <Loader />}
 				</div>
