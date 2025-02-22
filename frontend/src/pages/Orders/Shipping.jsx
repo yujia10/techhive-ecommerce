@@ -110,14 +110,14 @@ const Shipping = () => {
 									checked={paymentMethod === 'PayPal'}
 									onChange={(e) => setPaymentMethod(e.target.value)}
 								/>
-								<span className="ml-2">PayPal</span>
+								<span className="ml-2">PayPal or Credit Card</span>
 							</label>
 						</div>
 					</div>
 
 					{/* Submit button */}
 					<button
-						className="bg-pink-500 text-white py-2 px-4 rounded-full text-lg w-full"
+						className="bg-pink-500 text-white py-2 px-4 rounded-full text-lg w-full hover:bg-pink-600 transition-colors"
 						type="submit"
 					>
 						Continue
