@@ -79,17 +79,17 @@ const ProductDetails = () => {
 			) : (
 				<>
 					<div className="flex flex-wrap relative items-between mt-8 ml-[10rem]">
-						<div>
+						<div className="relative">
 							<img
 								src={product.image}
 								alt={product.name}
-								className="w-full xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem] mr-[2rem]"
+								className="w-full xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem]"
 							/>
 
 							<HeartIcon product={product} />
 						</div>
 
-						<div>
+						<div className="ml-[2rem]">
 							<h2 className="text-2xl font-semibold">{product.name}</h2>
 							<p className="my-4 xl:w-[35rem] lg:w-[35rem] md:w-[30rem] text-[#B0B0B0]">
 								{product.description}
