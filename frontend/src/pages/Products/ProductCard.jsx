@@ -28,12 +28,13 @@ const ProductCard = ({ p }) => {
 					>
 						{p?.brand}
 					</span>
-					<img
-						className="cursor-pointer w-full"
-						src={p.image}
-						alt={p.name}
-						style={{ height: '170px', objectFit: 'cover' }}
-					/>
+					<div className="relative h-[300px] overflow-hidden">
+						<img
+							className="w-full h-full object-cover rounded-t-lg hover:opacity-90 transition-opacity"
+							src={p.image}
+							alt={p.name}
+						/>
+					</div>
 				</Link>
 				<HeartIcon product={p} />
 			</section>
