@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Ratings from "./Ratings";
-import { useGetTopProductsQuery } from "../../redux/api/productApiSlice";
+import { useGetProductsByCategoryQuery } from "../../redux/api/productApiSlice";
 import SmallProduct from "./SmallProduct";
 import Loader from "../../components/Loader";
 
@@ -15,7 +15,10 @@ const ProductTabs = ({
   setComment,
   product,
 }) => {
-  const { data, isLoading } = useGetTopProductsQuery();
+  const { data: relatedProducts, isLoading } = useGetProductsByCategoryQuery({
+    category: product.category,
+    excludeId: product._id,
+  });
 
   const [activeTab, setActiveTab] = useState(1);
 
@@ -30,10 +33,10 @@ const ProductTabs = ({
   return (
     <div className="flex flex-col md:flex-row">
       {/* Tabs */}
-      <section className="mr-[5rem]">
+      <section className="mr-[5rem] min-h-[400px]">
         <div
-          className={`flex-1 p-4 cursor-pointer text-lg ${
-            activeTab === 1 ? "font-bold" : ""
+          className={`flex-1 p-4 cursor-pointer text-lg hover:bg-gray-800 whitespace-nowrap ${
+            activeTab === 1 ? "bg-gray-800 font-bold" : ""
           }`}
           onClick={() => handleTabClick(1)}
           >
@@ -41,8 +44,8 @@ const ProductTabs = ({
         </div>
 
         <div
-          className={`flex-1 p-4 cursor-pointer text-lg ${
-            activeTab === 2 ? "font-bold" : ""
+          className={`flex-1 p-4 cursor-pointer text-lg hover:bg-gray-800 whitespace-nowrap ${
+            activeTab === 2 ? "bg-gray-800 font-bold" : ""
           }`}
           onClick={() => handleTabClick(2)}
           >
@@ -50,8 +53,8 @@ const ProductTabs = ({
         </div>
 
         <div
-          className={`flex-1 p-4 cursor-pointer text-lg ${
-            activeTab === 3 ? "font-bold" : ""
+          className={`flex-1 p-4 cursor-pointer text-lg hover:bg-gray-800 whitespace-nowrap ${
+            activeTab === 3 ? "bg-gray-800 font-bold" : ""
           }`}
           onClick={() => handleTabClick(3)}
           >
@@ -150,20 +153,22 @@ const ProductTabs = ({
 
       {/* Content under the third tab */}
       <section>
-        {activeTab === 3 && (
-          <section className="ml-[4rem] flex flex-wrap">
-            {!data ? (
-              <Loader />
-            ) : (
-              data.map((product) => (
-                <div key={product._id}>
-                  <SmallProduct product={product} />
-                </div>
-              ))
-            )}
-          </section>
-        )}
-      </section>
+      {activeTab === 3 && (
+        <section className="ml-[4rem] flex flex-wrap">
+          {isLoading ? (
+            <Loader />
+          ) : relatedProducts && relatedProducts.length > 0 ? (
+            relatedProducts.map((relatedProduct) => (
+              <div key={relatedProduct._id}>
+                <SmallProduct product={relatedProduct} />
+              </div>
+            ))
+          ) : (
+            <p>No related products found</p>
+          )}
+        </section>
+      )}
+    </section>
 
     </div>
   )

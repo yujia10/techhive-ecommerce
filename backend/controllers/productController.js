@@ -125,6 +125,22 @@ const fetchProductById = asyncHandler(async (req, res) => {
 	}
 });
 
+// Fetch product by category
+const fetchProductsByCategory = asyncHandler(async (req, res) => {
+	try {
+		const { category } = req.params;
+
+		const products = await Product.find({ category, _id: { $ne: req.query.excludeId } })
+			.limit(6)
+			.sort({ createdAt: -1 });
+
+		res.json(products);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Server Error' });
+	}
+});
+
 const fetchAllProducts = asyncHandler(async (req, res) => {
 	try {
 		const products = await Product.find({})
@@ -236,6 +252,7 @@ export {
 	removeProduct,
 	fetchProducts,
 	fetchProductById,
+  fetchProductsByCategory,
 	fetchAllProducts,
 	addProductReview,
 	fetchTopProducts,
