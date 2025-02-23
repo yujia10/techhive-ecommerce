@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import {
@@ -10,12 +10,8 @@ import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import {
 	FaBox,
-	FaClock,
-	FaShoppingCart,
-	FaStar,
 	FaStore,
 } from 'react-icons/fa';
-import moment from 'moment';
 import HeartIcon from './HeartIcon';
 import Ratings from './Ratings';
 import ProductTabs from './ProductTabs';
@@ -23,7 +19,6 @@ import { addToCart } from '../../redux/features/cart/cartSlice';
 
 const ProductDetails = () => {
 	const { id: productId } = useParams();
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [qty, setQty] = useState(1);
@@ -60,7 +55,6 @@ const ProductDetails = () => {
 
 	const addToCartHandler = () => {
 		dispatch(addToCart({ ...product, qty }));
-		navigate('/cart');
 	};
 
 	return (
@@ -72,7 +66,7 @@ const ProductDetails = () => {
 					to="/"
 					className="text-white font-semibold hover:underline ml-[10rem]"
 				>
-					Go Back
+					Back
 				</Link>
 			</div>
 
@@ -103,45 +97,28 @@ const ProductDetails = () => {
 
 							<p className="text-5xl my-4 font-extrabold">$ {product.price}</p>
 
-							<div className="flex items-center justify-between w-[20rem]">
-								<div className="one">
+							<div className="w-[20rem]">
 									<h1 className="flex items-center mb-6">
 										<FaStore className="mr-2 text-white" /> Brand:{' '}
 										{product.brand}
 									</h1>
-
-									<h1 className="flex items-center mb-6 w-[20rem]">
-										<FaClock className="mr-2 text-white" /> Added:{' '}
-										{moment(product.createAt).fromNow()}
-									</h1>
-									<h1 className="flex items-center mb-6">
-										<FaStar className="mr-2 text-white" /> Reviews:{' '}
-										{product.numReviews}
-									</h1>
-								</div>
-
-								<div className="two">
-									<h1 className="flex items-center mb-6">
-										<FaStar className="mr-2 text-white" /> Ratings: {rating}
-									</h1>
-									<h1 className="flex items-center mb-6">
-										<FaShoppingCart className="mr-2 text-white" /> Quantity:{' '}
-										{product.quantity}
-									</h1>
-									<h1 className="flex items-center mb-6 w-[10rem]">
-										<FaBox className="mr-2 text-white" /> In Stock:{' '}
-										{product.countInStock}
-									</h1>
-								</div>
+                  <h1 className="flex items-center mb-6 w-[10rem]">
+                    <FaBox className="mr-2 text-white" /> In Stock:{" "}
+                    {product.countInStock}
+                  </h1>
 							</div>
 
-							<div className="flex justify-between flex-wrap">
+							<div className="mb-6">
 								<Ratings
 									value={product.rating}
 									text={`${product.numReviews} reviews`}
 								/>
-								{product.countInStock > 0 && (
+							</div>
+
+              <div className="mb-6">
+              {product.countInStock > 0 && (
 									<div>
+                    <label className="block mb-2 text-white">Select quantity</label>
 										<select
 											value={qty}
 											onChange={(e) => setQty(e.target.value)}
@@ -155,7 +132,7 @@ const ProductDetails = () => {
 										</select>
 									</div>
 								)}
-							</div>
+              </div>
 
 							<div className="btn-container">
 								<button
