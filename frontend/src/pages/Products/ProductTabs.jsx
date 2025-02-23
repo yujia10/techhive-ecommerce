@@ -32,8 +32,8 @@ const ProductTabs = ({
       {/* Tabs */}
       <section className="mr-[5rem]">
         <div
-          className={`flex-1 p-4 cursor-pointer text-lg ${
-            activeTab === 1 ? "font-bold" : ""
+          className={`flex-1 p-4 cursor-pointer text-lg hover:bg-gray-800 whitespace-nowrap ${
+            activeTab === 1 ? "bg-gray-800 font-bold" : ""
           }`}
           onClick={() => handleTabClick(1)}
           >
@@ -41,8 +41,8 @@ const ProductTabs = ({
         </div>
 
         <div
-          className={`flex-1 p-4 cursor-pointer text-lg ${
-            activeTab === 2 ? "font-bold" : ""
+          className={`flex-1 p-4 cursor-pointer text-lg hover:bg-gray-800 whitespace-nowrap ${
+            activeTab === 2 ? "bg-gray-800 font-bold" : ""
           }`}
           onClick={() => handleTabClick(2)}
           >
@@ -50,8 +50,8 @@ const ProductTabs = ({
         </div>
 
         <div
-          className={`flex-1 p-4 cursor-pointer text-lg ${
-            activeTab === 3 ? "font-bold" : ""
+          className={`flex-1 p-4 cursor-pointer text-lg hover:bg-gray-800 whitespace-nowrap ${
+            activeTab === 3 ? "bg-gray-800 font-bold" : ""
           }`}
           onClick={() => handleTabClick(3)}
           >
