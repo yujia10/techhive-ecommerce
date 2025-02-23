@@ -30,7 +30,7 @@ const ProductTabs = ({
   return (
     <div className="flex flex-col md:flex-row">
       {/* Tabs */}
-      <section className="mr-[5rem]">
+      <section className="mr-[5rem] min-h-[400px]">
         <div
           className={`flex-1 p-4 cursor-pointer text-lg hover:bg-gray-800 whitespace-nowrap ${
             activeTab === 1 ? "bg-gray-800 font-bold" : ""
