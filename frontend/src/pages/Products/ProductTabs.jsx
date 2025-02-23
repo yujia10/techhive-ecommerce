@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Ratings from "./Ratings";
-import { useGetTopProductsQuery } from "../../redux/api/productApiSlice";
+import { useGetProductsByCategoryQuery } from "../../redux/api/productApiSlice";
 import SmallProduct from "./SmallProduct";
 import Loader from "../../components/Loader";
 
@@ -15,7 +15,10 @@ const ProductTabs = ({
   setComment,
   product,
 }) => {
-  const { data, isLoading } = useGetTopProductsQuery();
+  const { data: relatedProducts, isLoading } = useGetProductsByCategoryQuery({
+    category: product.category,
+    excludeId: product._id,
+  });
 
   const [activeTab, setActiveTab] = useState(1);
 
@@ -150,20 +153,22 @@ const ProductTabs = ({
 
       {/* Content under the third tab */}
       <section>
-        {activeTab === 3 && (
-          <section className="ml-[4rem] flex flex-wrap">
-            {!data ? (
-              <Loader />
-            ) : (
-              data.map((product) => (
-                <div key={product._id}>
-                  <SmallProduct product={product} />
-                </div>
-              ))
-            )}
-          </section>
-        )}
-      </section>
+      {activeTab === 3 && (
+        <section className="ml-[4rem] flex flex-wrap">
+          {isLoading ? (
+            <Loader />
+          ) : relatedProducts && relatedProducts.length > 0 ? (
+            relatedProducts.map((relatedProduct) => (
+              <div key={relatedProduct._id}>
+                <SmallProduct product={relatedProduct} />
+              </div>
+            ))
+          ) : (
+            <p>No related products found</p>
+          )}
+        </section>
+      )}
+    </section>
 
     </div>
   )
