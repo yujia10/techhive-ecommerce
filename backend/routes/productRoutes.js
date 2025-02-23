@@ -9,6 +9,7 @@ import {
 	removeProduct,
 	fetchProducts,
 	fetchProductById,
+  fetchProductsByCategory,
 	fetchAllProducts,
 	addProductReview,
 	fetchTopProducts,
@@ -33,5 +34,6 @@ router
 	.put(authenticate, authorizeAdmin, formidable(), updateProductDetails)
 	.delete(authenticate, authorizeAdmin, removeProduct);
 router.route('/filtered-products').post(filterProducts);
+router.route('/category/:category').get(fetchProductsByCategory);
 
 export default router;
