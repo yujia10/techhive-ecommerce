@@ -5,14 +5,16 @@ import HeartIcon from './HeartIcon';
 const SmallProduct = ({ product }) => {
   return (
     <div className="w-[20rem] ml-[2rem] p-3">
-      <div className="relative">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="h-auto rounded"
-        />
-        <HeartIcon product={product} />
-      </div>
+      <Link to={`/product/${product._id}`}>
+        <div className="relative">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="h-auto rounded"
+          />
+          <HeartIcon product={product} />
+        </div>
+       </Link>
 
       <div className="p-4">
         <Link to={`/product/${product._id}`}>
