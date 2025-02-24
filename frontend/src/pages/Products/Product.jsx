@@ -4,14 +4,16 @@ import HeartIcon from "./HeartIcon";
 const Product = ({product}) => {
   return (
     <div className="w-[30rem] ml-[2rem] p-3 relative">
-      <div className="relative">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-[30rem] rounded"
-        />
-        <HeartIcon product={product} />
-      </div>
+        <div className="relative h-[300px]">
+          <Link to={`/product/${product._id}`}>
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-cover rounded hover:opacity-90 transition-opacity"
+            />
+          </Link>
+          <HeartIcon product={product} />
+        </div>
 
       <div className="p-4">
         <Link to={`/product/${product._id}`}>
