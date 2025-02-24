@@ -16,9 +16,18 @@ const Shop = () => {
 		(state) => state.shop
 	);
 	const categoriesQuery = useFetchCategoriesQuery();
-	const [priceFilter, setPriceFilter] = useState('');
+	const [selectedPriceRange, setSelectedPriceRange] = useState('');
 
 	const filteredProductsQuery = useGetFilteredProductsQuery({ checked, radio });
+
+	// Define price ranges
+	const priceRanges = [
+		{ id: '0-200', label: '$0 - $200', min: 0, max: 200 },
+		{ id: '200-400', label: '$200 - $400', min: 200, max: 400 },
+		{ id: '400-600', label: '$400 - $600', min: 400, max: 600 },
+		{ id: '600-800', label: '$600 - $800', min: 600, max: 800 },
+		{ id: '800-above', label: '$800 & Above', min: 800, max: Infinity },
+	];
 
 	// Effect to update categories in Redux store once data is loaded
 	useEffect(() => {
@@ -27,32 +36,54 @@ const Shop = () => {
 		}
 	}, [categoriesQuery.data, dispatch]);
 
-	// Effect to filter products based on categories, radio filters, and price
+	// Effect to filter products based on categories, radio filters, and price ranges
 	useEffect(() => {
-		if (!checked.length || !radio.length) {
-			if (!filteredProductsQuery.isLoading) {
-				// Filter products based on both checked categories and price filter
-				const filteredProducts = filteredProductsQuery.data.filter(
-					(product) => {
-						// Check if the product price includes the entered price filter value
-						return (
-							product.price.toString().includes(priceFilter) ||
-							product.price === parseInt(priceFilter, 10)
-						);
-					}
-				);
+		if (!filteredProductsQuery.isLoading && filteredProductsQuery.data) {
+			let filteredProducts = [...filteredProductsQuery.data];
 
-				dispatch(setProducts(filteredProducts));
+			// Apply category filter
+			if (checked.length > 0) {
+				filteredProducts = filteredProducts.filter((product) =>
+					checked.includes(product.category)
+				);
 			}
+
+			// Apply brand filter
+			if (radio.length > 0) {
+				filteredProducts = filteredProducts.filter(
+					(product) => product.brand === radio[0]
+				);
+			}
+
+			// Apply price range filter
+			if (selectedPriceRange) {
+				const range = priceRanges.find(
+					(range) => range.id === selectedPriceRange
+				);
+				if (range) {
+					filteredProducts = filteredProducts.filter(
+						(product) =>
+							product.price >= range.min &&
+							(range.max === Infinity
+								? product.price >= range.min
+								: product.price <= range.max)
+					);
+				}
+			}
+
+			dispatch(setProducts(filteredProducts));
 		}
-	}, [checked, radio, filteredProductsQuery.data, dispatch, priceFilter]);
+	}, [
+		checked,
+		radio,
+		filteredProductsQuery.data,
+		dispatch,
+		selectedPriceRange,
+	]);
 
 	// Handler for filtering products by brand
 	const handleBrandClick = (brand) => {
-		const productsByBrand = filteredProductsQuery.data?.filter(
-			(product) => product.brand === brand
-		);
-		dispatch(setProducts(productsByBrand));
+		dispatch(setRadio([brand]));
 	};
 
 	// Handler for updating checked categories
@@ -61,6 +92,11 @@ const Shop = () => {
 			? [...checked, id]
 			: checked.filter((c) => c !== id);
 		dispatch(setChecked(updatedChecked));
+	};
+
+	// Handler for price range selection
+	const handlePriceRangeChange = (rangeId) => {
+		setSelectedPriceRange(rangeId);
 	};
 
 	// Add "All Brands" to uniqueBrands
@@ -73,12 +109,6 @@ const Shop = () => {
 			)
 		),
 	];
-
-	// Handler for updating price filter state
-	const handlePriceChange = (e) => {
-		// Update the price filter state when the user types in the input filed
-		setPriceFilter(e.target.value);
-	};
 
 	return (
 		<>
@@ -146,24 +176,28 @@ const Shop = () => {
 						<h2 className="h4 tetx-center py-2 bg-black rounded-full mb-2">
 							Filter by Price
 						</h2>
-						{/* Price filter input */}
-						<div className="p-5 w-[15rem]">
-							<input
-								type="text"
-								placeholder="Enter Price"
-								value={priceFilter}
-								onChange={handlePriceChange}
-								className="w-full px-3 py-2 
-								bg-white/10 
-								text-white  
-								placeholder-gray-400  
-								border border-white/20  
-								rounded-lg  
-								focus:outline-none  
-								focus:ring-2  
-								focus:ring-pink-500  
-								focus:border-transparent"
-							/>
+
+						{/* Price Range Selection */}
+						<div className="p-5">
+							{priceRanges.map((range) => (
+								<div key={range.id} className="flex items-center mr-4 mb-5">
+									<input
+										type="radio"
+										id={range.id}
+										name="priceRange"
+										onChange={() => handlePriceRangeChange(range.id)}
+										className="w-4 h-4 text-pink-400 bg-gray-100 border-gray-300
+                    focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 
+                    focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+									/>
+									<label
+										htmlFor={range.id}
+										className="ml-2 text-sm font-medium text-white dark:text-gray-300"
+									>
+										{range.label}
+									</label>
+								</div>
+							))}
 						</div>
 
 						{/* Reset Button */}
