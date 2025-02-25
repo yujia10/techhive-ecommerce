@@ -88,11 +88,11 @@ const PlaceOrder = () => {
 										{/* Item quantity */}
 										<td className="p-2">{item.qty}</td>
 										{/* Item price */}
-										<td className="p-2">$ {item.price.toFixed(2)}</td>
+										<td className="p-2">${item.price.toFixed(2)}</td>
 										{/* Items total price */}
 										<td className="p-2">
 											{' '}
-											$ {(item.qty * item.price).toFixed(2)}
+											${(item.qty * item.price).toFixed(2)}
 										</td>
 									</tr>
 								))}
@@ -107,21 +107,21 @@ const PlaceOrder = () => {
 						{/* Price details */}
 						<ul className="text-lg">
 							<li>
-								<span className="font-semibold mb-4">Items:</span> ${' '}
+								<span className="font-semibold mb-4">Items:</span> $
 								{cart.itemsPrice}
 							</li>
 							<li>
 								<span className="font-semibold mb-4">Shipping:</span>{' '}
 								{Number(cart.shippingPrice) === 0
 									? 'FREE'
-									: `$ ${cart.shippingPrice}`}
+									: `$${cart.shippingPrice}`}
 							</li>
 							<li>
-								<span className="font-semibold mb-4">GST(included):</span> ${' '}
+								<span className="font-semibold mb-4">GST(included):</span> $
 								{cart.taxPrice}
 							</li>
 							<li>
-								<span className="font-semibold mb-4">Total:</span> ${' '}
+								<span className="font-semibold mb-4">Total:</span> $
 								{cart.totalPrice}
 							</li>
 						</ul>
