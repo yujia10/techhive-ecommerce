@@ -111,7 +111,7 @@ const ProductDetails = () => {
 							<div className="mb-6">
 								<Ratings
 									value={product.rating}
-									text={`${product.numReviews} reviews`}
+									text={`${product.numReviews} ${product.numReviews <= 1 ? "review" : "reviews"}`}
 								/>
 							</div>
 

@@ -81,11 +81,11 @@ const ProductTabs = ({
                     className="p-2 border rounded-lg xl:w-[40rem] text-black"
                   >
                     <option value="">Select</option>
-                    <option value="1">Inferior</option>
-                    <option value="2">Decent</option>
-                    <option value="3">Great</option>
-                    <option value="4">Excellent</option>
-                    <option value="5">Exceptional</option>
+                    <option value="1">1 - Poor</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="3">3 - Great</option>
+                    <option value="4">4 - Excellent</option>
+                    <option value="5">5 - Exceptional</option>
                   </select>
                 </div>
 
