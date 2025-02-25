@@ -76,7 +76,7 @@ const Cart = () => {
 											</Link>
 											<div className="mt-1 text-white">{item.brand}</div>
 											<div className="mt-1 text-white font-bold">
-												$ {item.price}
+												${item.price}
 											</div>
 										</div>
 
@@ -121,7 +121,7 @@ const Cart = () => {
 											Items (
 											{cartItems.reduce((acc, item) => acc + item.qty, 0)}):
 										</span>
-										<span>$ {cart.itemsPrice}</span>
+										<span>${cart.itemsPrice}</span>
 									</div>
 									{/* Shipping Estimate */}
 									<div className="flex justify-between mb-3">
@@ -138,7 +138,7 @@ const Cart = () => {
 									<div className="flex justify-between mb-4">
 										<span className="text-lg font-semibold">Order Total:</span>
 										<span className="text-lg font-bold text-pink-500">
-											$ {cart.totalPrice}
+											${cart.totalPrice}
 										</span>
 									</div>
 									{/* Checkout Button */}
@@ -155,7 +155,7 @@ const Cart = () => {
 											(acc, item) => acc + item.price * item.qty,
 											0
 										) < 100 &&
-											`Add $ ${(
+											`Add $${(
 												100 -
 												cartItems.reduce(
 													(acc, item) => acc + item.price * item.qty,
