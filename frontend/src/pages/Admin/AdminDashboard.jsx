@@ -67,8 +67,11 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (salesDetail) {
+      // Sort data by date in ascending order
+      const sortedSalesDetail = [...salesDetail].sort((a, b) => new Date(a._id) - new Date(b._id));
+
       // Format sales data for the chart
-      const formattedSalesDate = salesDetail.map((item) => ({
+      const formattedSalesDate = sortedSalesDetail.map((item) => ({
         x: item._id,
         y: item.totalSales,
       }));
@@ -95,7 +98,7 @@ const AdminDashboard = () => {
 
       <section className="xl:ml-[4rem] md:ml-[0rem]">
         <div className="w-[80%] flex justify-around flex-wrap">
-          <div className="rounded-lg bg-black p-5 w-[20rem] mt-5">
+          <div className="rounded-lg bg-black p-5 w-[20rem] mt-5 flex flex-col items-center justify-center">
             <div className="font-bold rounded-full w-[3rem] bg-pink-500 text-center p-3">
               $
             </div>
@@ -105,7 +108,7 @@ const AdminDashboard = () => {
               $ {isSalesLoading ? <Loader /> : sales?.totalSales?.toFixed(2) ?? "0.00"}
             </h1>
           </div>
-          <div className="rounded-lg bg-black p-5 w-[20rem] mt-5">
+          <div className="rounded-lg bg-black p-5 w-[20rem] mt-5 flex flex-col items-center justify-center">
             <div className="font-bold rounded-full w-[3rem] bg-pink-500 text-center p-3">
               C
             </div>
@@ -115,7 +118,7 @@ const AdminDashboard = () => {
               {isUsersLoading ? <Loader /> : customers?.length}
             </h1>
           </div>
-          <div className="rounded-lg bg-black p-5 w-[20rem] mt-5">
+          <div className="rounded-lg bg-black p-5 w-[20rem] mt-5 flex flex-col items-center justify-center">
             <div className="font-bold rounded-full w-[3rem] bg-pink-500 text-center p-3">
               O
             </div>
