@@ -67,8 +67,11 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (salesDetail) {
+      // Sort data by date in ascending order
+      const sortedSalesDetail = [...salesDetail].sort((a, b) => new Date(a._id) - new Date(b._id));
+
       // Format sales data for the chart
-      const formattedSalesDate = salesDetail.map((item) => ({
+      const formattedSalesDate = sortedSalesDetail.map((item) => ({
         x: item._id,
         y: item.totalSales,
       }));
