@@ -50,7 +50,7 @@ const ProductCarousel = () => {
           </Slider>
         )}
       </div>
-      <div className="flex">
+      <div className="flex mt-5">
         <Link
         to="/shop"
         className="bg-pink-600 font-bold rounded-lg py-3 px-10"
