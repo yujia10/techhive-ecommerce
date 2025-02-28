@@ -22,7 +22,7 @@ const ProductCarousel = () => {
 
   return (
     <div className="h-[30rem] flex flex-col justify-between items-start">
-      <div className="mt-4 ml-1">
+      <div className="mt-4">
         {isLoading ? null : error ? (
           <Message variant="danger">
             {error?.data?.message || error.error}
@@ -30,7 +30,7 @@ const ProductCarousel = () => {
         ) : (
           <Slider
             {...settings}
-            className="w-full max-w-[50rem]"
+            className="xl:w-[50rem]  lg:w-[50rem] md:w-[56rem] sm:w-[40rem] sm:block"
           >
             {products.map(
               ({
@@ -50,7 +50,7 @@ const ProductCarousel = () => {
           </Slider>
         )}
       </div>
-      <div className="flex">
+      <div className="flex mt-5">
         <Link
         to="/shop"
         className="bg-pink-600 font-bold rounded-lg py-3 px-10"

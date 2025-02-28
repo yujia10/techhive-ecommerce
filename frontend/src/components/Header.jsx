@@ -18,8 +18,8 @@ const Header = () => {
 
   return (
     <>
-      <div className="ml-[8rem] w-[6rem]" >
-        <img className="h-[5rem]" src={logoImg}/>
+      <div className="ml-[8rem] w-[10rem]" >
+        <img className="h-[8rem]" src={logoImg}/>
       </div>
       <div className="flex justify-around">
         <div className="xl:block lg:hidden md:hidden:sm:hidden">
