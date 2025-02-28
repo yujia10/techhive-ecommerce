@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useSelector } from 'react-redux';
@@ -31,12 +30,6 @@ const Order = () => {
 		isLoading: loadingPayPal,
 		error: errorPayPal,
 	} = useGetPaypalClientIdQuery();
-
-	// Debug PayPal client ID
-	useEffect(() => {
-		console.log('PayPal data received:', paypal);
-		console.log('PayPal client ID:', paypal?.clientId);
-	}, [paypal]);
 
 	// Handle successful PayPal payment approval
 	// Captures the payment and updates order status
