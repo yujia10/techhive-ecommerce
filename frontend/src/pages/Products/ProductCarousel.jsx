@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
 import { useGetTopProductsQuery } from "../../redux/api/productApiSlice";
 import Message from "../../components/Message";
 import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css';
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const ProductCarousel = () => {
-  const {data: products, isLoading, error} = useGetTopProductsQuery();
 
-  // settings for the carousel
+const ProductCarousel = () => {
+  const { data: products, isLoading, error } = useGetTopProductsQuery();
+
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -20,35 +21,46 @@ const ProductCarousel = () => {
   };
 
   return (
-    <div className="lg:block xl:block md:block">
-      {isLoading ? null : error ? (
-        <Message variant="danger">
-          {error?.data?.message || error.error}
-        </Message>
-      ) : (
-        <Slider
-          {...settings}
-          className="xl:w-[65rem]  lg:w-[60rem] md:w-[56rem] sm:w-[40rem] sm:block"
+    <div className="h-[30rem] flex flex-col justify-between items-start">
+      <div className="mt-4 ml-1">
+        {isLoading ? null : error ? (
+          <Message variant="danger">
+            {error?.data?.message || error.error}
+          </Message>
+        ) : (
+          <Slider
+            {...settings}
+            className="w-full max-w-[50rem]"
+          >
+            {products.map(
+              ({
+                image,
+                _id,
+                name,
+              }) => (
+                <div key={_id}>
+                  <img
+                    src={image}
+                    alt={name}
+                    className="w-full rounded-lg object-cover h-[25rem]"
+                  />
+                </div>
+              )
+            )}
+          </Slider>
+        )}
+      </div>
+      <div className="flex">
+        <Link
+        to="/shop"
+        className="bg-pink-600 font-bold rounded-lg py-3 px-10"
         >
-          {products.map(
-            ({
-              image,
-              _id,
-              name,
-            }) => (
-              <div key={_id}>
-                <img
-                  src={image}
-                  alt={name}
-                  className="w-full h-[35rem] rounded-lg object-cover"
-                />
-              </div>
-            )
-          )}
-        </Slider>
-      )}
+          Shop Now
+        </Link>
+      </div>
+
     </div>
   );
 };
 
-export default ProductCarousel
+export default ProductCarousel;
