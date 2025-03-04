@@ -17,6 +17,18 @@ mongodb/
 mongodb-binaries/
 .mongodb-prebuilt/
 .mongosh/
+# MongoDB dump files
+*.bson
+*.metadata.json
+**/dump/
+**/categories.bson
+**/categories.metadata.json
+**/orders.bson
+**/orders.metadata.json
+**/products.bson
+**/products.metadata.json
+**/users.bson
+**/users.metadata.json
 
 # Logs
 logs
