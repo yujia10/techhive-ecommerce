@@ -1,15 +1,83 @@
 # Environment variables
 .env
+.env.*
+!.env.example
+
 # Dependencies
-node_modules
 node_modules/
+node_modules
+package-lock.json
 .package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# MongoDB
+.mongodb/
+mongodb/
+mongodb-binaries/
+.mongodb-prebuilt/
+.mongosh/
+# MongoDB dump files
+*.bson
+*.metadata.json
+**/dump/
+**/categories.bson
+**/categories.metadata.json
+**/orders.bson
+**/orders.metadata.json
+**/products.bson
+**/products.metadata.json
+**/users.bson
+**/users.metadata.json
+
 # Logs
 logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
 # OS
 .DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+._*
+
 # Uploaded files
 /uploads/*
 !/uploads/.gitkeep
+
+# IDE and editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+*.swp
+*.swo
+*~
+
+# Build outputs
+/dist
+/build
+/.next
+/out
+/coverage
+.nyc_output
+
+# Temporary files
+.tmp/
+.temp/
+.cache/
+.npm/
+
+# dotenv related files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
