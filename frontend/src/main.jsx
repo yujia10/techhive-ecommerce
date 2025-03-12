@@ -20,7 +20,7 @@ import AdminRoute from './pages/Admin/AdminRoute.jsx';
 
 import CategoryList from './pages/Admin/CategoryList.jsx';
 
-import ProductList from './pages/Admin/productList.jsx';
+import ProductList from './pages/Admin/ProductList.jsx';
 import AllProducts from './pages/Admin/AllProducts.jsx';
 import ProductUpdate from './pages/Admin/ProductUpdate.jsx';
 
