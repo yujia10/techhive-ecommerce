@@ -46,8 +46,6 @@ ehthumbs.db
 Desktop.ini
 ._*
 
-# Uploaded files
-backend/uploads/
 
 # IDE and editors
 .idea/
