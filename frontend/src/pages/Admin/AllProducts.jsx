@@ -41,19 +41,19 @@ const AllProducts = () => {
 											className="w-[10rem] object-cover"
 										/>
 										{/* Details */}
-										<div className="p-4 flex flex-col justify-around">
+										<div className="p-4 flex flex-col justify-around w-[30rem]">
 											<div className="flex justify-between">
 												{/* Name */}
-												<h5 className="text-xl font-semibold mb-2">
+												<h5 className="text-xl font-semibold mb-2 truncate max-w-[70%]">
 													{product?.name}
 												</h5>
 												{/* Created Date */}
-												<p className="text-gray-400 text-xs">
+												<p className="text-gray-400 text-xs ml-2 whitespace-nowrap">
 													{moment(product.createdAt).format('DD/MM/YYYY')}
 												</p>
 											</div>
 											{/* Description */}
-											<p className="text-gray-400 xl:w-[30rem] lg:w-[30rem] md:w-[20rem] sm:w-[10rem] text-sm mb-4">
+											<p className="text-gray-400 text-sm mb-4 line-clamp-2">
 												{product?.description?.substring(0, 160)}...
 											</p>
 
@@ -82,7 +82,9 @@ const AllProducts = () => {
 													</svg>
 												</Link>
 												{/* Display price with two decimal places */}
-												<p>${product?.price?.toFixed(2)}</p>
+												<p className="text-pink-500 font-bold">
+													${product?.price?.toFixed(2)}
+												</p>
 											</div>
 										</div>
 									</div>
