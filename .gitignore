@@ -48,6 +48,11 @@ Desktop.ini
 
 # Uploaded files
 /uploads/*
+!/uploads/*.jpg
+!/uploads/*.jpeg
+!/uploads/*.png
+!/uploads/*.gif
+!/uploads/*.webp
 !/uploads/.gitkeep
 
 # IDE and editors
