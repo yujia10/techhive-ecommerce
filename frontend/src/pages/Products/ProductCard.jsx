@@ -39,8 +39,10 @@ const ProductCard = ({ p }) => {
 			</section>
 
 			<div className="p-5">
-				<div className="flex justify-between">
-					<h5 className="mb-2 text-xl text-white dark:text-white">{p.name}</h5>
+				<div className="flex flex-col mb-3">
+					<h5 className="text-xl text-white dark:text-white truncate mb-2">
+						{p.name}
+					</h5>
 					<p className="font-semibold text-pink-500">
 						{p?.price?.toLocaleString('en-AU', {
 							style: 'currency',
