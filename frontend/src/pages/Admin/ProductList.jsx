@@ -43,17 +43,26 @@ const ProductList = () => {
 			productData.append('brand', brand);
 			productData.append('countInStock', stock);
 
-			const { data } = await createProduct(productData);
+			const response = await createProduct(productData);
 
-			if (data.error) {
-				toast.error('Product create failed. Please try Again.');
+			if (response.error) {
+				// Check if there's a specific error message from the API
+				const errorMessage =
+					response.error?.data?.error ||
+					'Product create failed. Please try again.';
+				toast.error(errorMessage);
 			} else {
-				toast.success(`${data.name} is created`);
+				toast.success(`${response.data.name} is created`);
 				navigate('/');
 			}
 		} catch (error) {
 			console.error(error);
-			toast.error('Product create failed. Please try Again.');
+			// Display specific error message if available
+			const errorMessage =
+				error.data?.error ||
+				error.message ||
+				'Product create failed. Please try again.';
+			toast.error(errorMessage);
 		}
 	};
 
