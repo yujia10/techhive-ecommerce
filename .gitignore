@@ -47,8 +47,7 @@ Desktop.ini
 ._*
 
 # Uploaded files
-/uploads/*
-!/uploads/.gitkeep
+backend/uploads/
 
 # IDE and editors
 .idea/
