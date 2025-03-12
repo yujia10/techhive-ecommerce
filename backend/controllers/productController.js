@@ -1,6 +1,9 @@
 import asyncHandler from '../middlewares/asyncHandler.js';
 import Product from '../models/productModel.js';
 
+// Maximum allowed length for product name
+const MAX_NAME_LENGTH = 50;
+
 // Create/Add product function
 const addProduct = asyncHandler(async (req, res) => {
 	try {
@@ -10,6 +13,12 @@ const addProduct = asyncHandler(async (req, res) => {
 		switch (true) {
 			case !name:
 				return res.json({ error: 'Name is required!' });
+			case name.length > MAX_NAME_LENGTH:
+				return res
+					.status(400)
+					.json({
+						error: `Name must be ${MAX_NAME_LENGTH} characters or less!`,
+					});
 			case !description:
 				return res.json({ error: 'Description is required!' });
 			case !price:
@@ -40,6 +49,10 @@ const updateProductDetails = asyncHandler(async (req, res) => {
 		switch (true) {
 			case !name:
 				return res.json({ error: 'Name is required!' });
+			case name.length > MAX_NAME_LENGTH:
+				return res.status(400).json({
+					error: `Name must be ${MAX_NAME_LENGTH} characters or less!`,
+				});
 			case !description:
 				return res.json({ error: 'Description is required!' });
 			case !price:
@@ -130,7 +143,10 @@ const fetchProductsByCategory = asyncHandler(async (req, res) => {
 	try {
 		const { category } = req.params;
 
-		const products = await Product.find({ category, _id: { $ne: req.query.excludeId } })
+		const products = await Product.find({
+			category,
+			_id: { $ne: req.query.excludeId },
+		})
 			.limit(6)
 			.sort({ createdAt: -1 });
 
@@ -252,7 +268,7 @@ export {
 	removeProduct,
 	fetchProducts,
 	fetchProductById,
-  fetchProductsByCategory,
+	fetchProductsByCategory,
 	fetchAllProducts,
 	addProductReview,
 	fetchTopProducts,
