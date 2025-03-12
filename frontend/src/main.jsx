@@ -20,7 +20,7 @@ import AdminRoute from './pages/Admin/AdminRoute.jsx';
 
 import CategoryList from './pages/Admin/CategoryList.jsx';
 
-import ProductList from './pages/Admin/productList.jsx';
+import ProductList from './pages/Admin/ProductList.jsx';
 import AllProducts from './pages/Admin/AllProducts.jsx';
 import ProductUpdate from './pages/Admin/ProductUpdate.jsx';
 
@@ -69,7 +69,7 @@ const router = createBrowserRouter(
 				<Route path="allproductslist" element={<AllProducts />} />
 				<Route path="orderlist" element={<OrderList />} />
 				<Route path="product/update/:_id" element={<ProductUpdate />} />
-        <Route path="dashboard" element={<AdminDashboard />} />
+				<Route path="dashboard" element={<AdminDashboard />} />
 			</Route>
 		</Route>
 	)
