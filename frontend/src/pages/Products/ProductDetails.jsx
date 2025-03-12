@@ -78,20 +78,20 @@ const ProductDetails = () => {
 				</Message>
 			) : (
 				<>
-					<div className="flex flex-wrap relative items-between mt-8 ml-[10rem]">
+					<div className="flex flex-row relative items-between mt-8 ml-[10rem]">
 						<div className="relative">
 							<img
 								src={product.image}
 								alt={product.name}
-								className="w-full xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem]"
+								className="w-full h-full object-cover xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem]"
 							/>
 
 							<HeartIcon product={product} />
 						</div>
 
-						<div className="ml-[2rem]">
-							<h2 className="text-2xl font-semibold">{product.name}</h2>
-							<p className="my-4 xl:w-[35rem] lg:w-[35rem] md:w-[30rem] text-[#B0B0B0]">
+						<div className="ml-[2rem] w-full xl:w-[35rem] lg:w-[35rem] md:w-[30rem]">
+							<h2 className="text-2xl flex-wrap font-semibold">{product.name}</h2>
+							<p className="my-4 text-[#B0B0B0]">
 								{product.description}
 							</p>
 
@@ -144,8 +144,9 @@ const ProductDetails = () => {
 								</button>
 							</div>
 						</div>
+					</div>
 
-						<div className="mt-[5rem] container flex flex-wrap items-start justify-between">
+          <div className="mt-[5rem] ml-[10rem] container flex flex-wrap items-start justify-between">
 							<ProductTabs
 								loadingProductReview={loadingProductReview}
 								userInfo={userInfo}
@@ -156,7 +157,6 @@ const ProductDetails = () => {
 								setComment={setComment}
 								product={product}
 							/>
-						</div>
 					</div>
 				</>
 			)}
