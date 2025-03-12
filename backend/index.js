@@ -1,5 +1,6 @@
 // packages
 import path from 'path';
+import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -19,19 +20,28 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = ['https://techhive-ecommerce-platform.onrender.com'];
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use(
+	cors({
+		origin: allowedOrigins,
+		methods: ['GET', 'POST', 'PUT', 'DELETE'],
+		credentials: true,
+	})
+);
 app.use('/api/users', userRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/orders', orderRoutes);
 
-app.get('/api/config/paypal', (req,res) => {
-  res.send({clientId: process.env.PAYPAL_CLIENT_ID})
-})
+app.get('/api/config/paypal', (req, res) => {
+	res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
+});
 
 const __dirname = path.resolve();
 // Set up static file serving for the uploads folder
