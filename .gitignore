@@ -47,13 +47,7 @@ Desktop.ini
 ._*
 
 # Uploaded files
-/uploads/*
-!/uploads/*.jpg
-!/uploads/*.jpeg
-!/uploads/*.png
-!/uploads/*.gif
-!/uploads/*.webp
-!/uploads/.gitkeep
+backend/uploads/
 
 # IDE and editors
 .idea/
