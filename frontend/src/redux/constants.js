@@ -1,7 +1,7 @@
 export const BASE_URL =
 	import.meta.env.MODE === 'development'
 		? 'http://localhost:5001'
-		: 'https://techhive-ecommerce.onrender.com';
+		: 'https://techhive-ecommerce-fpkw.onrender.com';
 
 export const USERS_URL = `${BASE_URL}/api/users`;
 export const CATEGORY_URL = `${BASE_URL}/api/category`;
