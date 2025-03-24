@@ -117,7 +117,7 @@ const Shipping = () => {
 
 					{/* Submit button */}
 					<button
-						className="bg-pink-500 text-white py-2 px-4 rounded-full text-lg w-full hover:bg-pink-600 transition-colors"
+						className="bg-pink-600 text-white py-2 px-4 rounded-full text-lg w-full hover:bg-pink-700 transition-colors"
 						type="submit"
 					>
 						Continue
