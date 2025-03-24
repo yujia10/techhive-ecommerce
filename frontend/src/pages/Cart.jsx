@@ -143,7 +143,7 @@ const Cart = () => {
 									</div>
 									{/* Checkout Button */}
 									<button
-										className="bg-pink-500 py-2 px-4 rounded-full text-lg w-full hover:bg-pink-600 transition-colors"
+										className="bg-pink-600 py-2 px-4 rounded-full text-lg w-full hover:bg-pink-700 transition-colors"
 										disabled={cartItems.length === 0}
 										onClick={checkoutHandler}
 									>

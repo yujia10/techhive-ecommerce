@@ -148,7 +148,7 @@ const PlaceOrder = () => {
 					{/* Place order button */}
 					<div className="flex justify-center mt-6">
 						<button
-							className="bg-pink-500 text-white py-2 px-8 rounded-full text-lg hover:bg-pink-600 transition-colors w-1/3 max-w-xs"
+							className="bg-pink-600 text-white py-2 px-8 rounded-full text-lg hover:bg-pink-700 transition-colors w-1/3 max-w-xs"
 							disabled={cart.cartItems.length === 0}
 							onClick={placeOrderHandler}
 						>

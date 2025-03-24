@@ -46,7 +46,7 @@ const ProductCarousel = () => {
 			<div className="flex mt-16">
 				<Link
 					to="/shop"
-					className="bg-pink-600 font-bold rounded-lg py-3 px-10"
+					className="bg-pink-600 hover:bg-pink-700 font-bold rounded-lg py-3 px-10"
 				>
 					Shop Now
 				</Link>
