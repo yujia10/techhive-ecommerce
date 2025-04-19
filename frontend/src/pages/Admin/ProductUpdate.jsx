@@ -242,14 +242,14 @@ const ProductUpdate = () => {
 							{/* Submit button */}
 							<button
 								onClick={handleSubmit}
-								className="py-4 px-10 mt-5 rounded-lg text-lg font-bold  bg-green-600 mr-6"
+								className="py-4 px-10 mt-5 rounded-lg text-lg font-bold  bg-green-600 hover:bg-green-700 mr-6"
 							>
 								Update
 							</button>
 							{/* Delete Button */}
 							<button
 								onClick={handleDelete}
-								className="py-4 px-10 mt-5 rounded-lg text-lg font-bold bg-pink-600"
+								className="py-4 px-10 mt-5 rounded-lg text-lg font-bold bg-pink-600 hover:bg-pink-700"
 							>
 								Delete
 							</button>
