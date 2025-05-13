@@ -1,6 +1,7 @@
-describe('MongoDB Setup', () => {
-  it('can import mongoose', () => {
-    const mongoose = require('mongoose');
-    expect(mongoose).toBeDefined();
-  });
+import mongoose from "mongoose";
+
+describe("MongoDB Setup", () => {
+	it("can import mongoose", () => {
+		expect(mongoose).toBeDefined();
+	});
 });
