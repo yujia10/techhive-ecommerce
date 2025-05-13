@@ -42,17 +42,17 @@ afterEach(async () => {
 describe('Product Model', () => {
   it('should create a new product successfully', async () => {
     const productData = {
-      name: 'Test Product',
-      description: 'This is a test product',
-      price: 99.99,
-      category: electronicsCategoryId, // Using the ObjectId instead of a string
-      brand: 'Test Brand',
-      quantity: 10,
-      image: '/images/test.jpg',
-      countInStock: 10,
-      rating: 0,
-      numReviews: 0
-    };
+			name: "Test Product",
+			description: "This is a test product",
+			price: 99.99,
+			category: electronicsCategoryId,
+			brand: "Test Brand",
+			quantity: 10,
+			image: "/images/test.jpg",
+			countInStock: 10,
+			rating: 0,
+			numReviews: 0,
+		};
     
     const product = new Product(productData);
     const savedProduct = await product.save();
@@ -80,27 +80,27 @@ describe('Product Model', () => {
   it('should be able to find products by category', async () => {
     // Create test products
     await Product.create([
-      {
-        name: 'Product 1',
-        description: 'Description 1',
-        price: 99.99,
-        category: electronicsCategoryId, // Using the ObjectId
-        brand: 'Brand 1',
-        quantity: 10,
-        image: '/images/product1.jpg',
-        countInStock: 10
-      },
-      {
-        name: 'Product 2',
-        description: 'Description 2',
-        price: 149.99,
-        category: computersCategoryId, // Using the ObjectId
-        brand: 'Brand 2',
-        quantity: 5,
-        image: '/images/product2.jpg',
-        countInStock: 5
-      }
-    ]);
+			{
+				name: "Product 1",
+				description: "Description 1",
+				price: 99.99,
+				category: electronicsCategoryId,
+				brand: "Brand 1",
+				quantity: 10,
+				image: "/images/product1.jpg",
+				countInStock: 10,
+			},
+			{
+				name: "Product 2",
+				description: "Description 2",
+				price: 149.99,
+				category: computersCategoryId,
+				brand: "Brand 2",
+				quantity: 5,
+				image: "/images/product2.jpg",
+				countInStock: 5,
+			},
+		]);
     
     const electronicsProducts = await Product.find({ category: electronicsCategoryId });
     expect(electronicsProducts.length).toBe(1);
