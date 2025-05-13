@@ -60,4 +60,10 @@ app.get('/api/config/paypal', (req, res) => {
 	res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
 });
 
+// Health Check
+app.get('/health',(req,res)=>{
+	res.status(200).send('OK');
+});
+
+// Start server
 app.listen(port, () => console.log(`Server running on port ${port}`));
