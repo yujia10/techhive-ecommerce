@@ -14,7 +14,11 @@ import orderRoutes from './routes/orderRoutes.js';
 
 dotenv.config();
 const port = process.env.PORT;
-connectDB();
+
+// Do not connect database in test environment
+if (process.env.NODE_ENV !== 'test') {
+  connectDB();
+}
 
 const app = express();
 // Export this app instance for test use
