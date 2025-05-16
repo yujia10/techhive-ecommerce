@@ -17,6 +17,8 @@ const port = process.env.PORT;
 connectDB();
 
 const app = express();
+// Export this app instance for test use
+export default app;
 
 const allowedOrigins = [
 	'https://techhive-ecommerce-platform.onrender.com',
@@ -65,5 +67,7 @@ app.get('/health',(req,res)=>{
 	res.status(200).send('OK');
 });
 
-// Start server
-app.listen(port, () => console.log(`Server running on port ${port}`));
+// Start the server only when this file is run directly.
+if (process.env.NODE_ENV !== 'test') {
+	app.listen(port, () => console.log(`Server running on port ${port}`));
+}
