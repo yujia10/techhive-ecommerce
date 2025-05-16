@@ -1,9 +1,16 @@
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+import path from 'path';
 import request from 'supertest';
 import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import app from '../../index.js';
 import User from '../../models/userModel.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
 let mongoServer;
 
@@ -34,6 +41,7 @@ describe('User API', () => {
       password: 'password123'
     });
 
+    console.log('Error response:', res.body);
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('_id');
     expect(res.body.email).toBe('test@example.com');
@@ -53,6 +61,7 @@ describe('User API', () => {
       password: 'password123'
     });
 
+    console.log('Error response:', res.body);
     expect(res.statusCode).toBe(400);
     expect(res.body.message).toMatch(/exists/i);
   });
@@ -72,6 +81,7 @@ describe('User API', () => {
       password: 'password123'
     });
 
+    console.log('Error response:', res.body);
     expect(res.statusCode).toBe(200);
     expect(res.body.email).toBe('login@example.com');
     expect(res.headers['set-cookie']).toBeDefined(); // check if JWT has been set
@@ -84,6 +94,7 @@ describe('User API', () => {
       password: 'wrongpassword'
     });
 
+    console.log('Error response:', res.body);
     expect(res.statusCode).toBe(401);
     expect(res.body.message).toMatch(/invalid/i);
   });
