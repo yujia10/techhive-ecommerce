@@ -73,5 +73,14 @@ app.get('/health',(req,res)=>{
 
 // Start the server only when this file is run directly.
 if (process.env.NODE_ENV !== 'test') {
-	app.listen(port, () => console.log(`Server running on port ${port}`));
+	app.listen(port, () => console.log(`Server running on port ${port}`)); // eslint-disable-line no-console
 }
+
+// error handler
+app.use((err, req, res, _next) => {
+  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  res.status(statusCode).json({
+    message: err.message,
+    stack: process.env.NODE_ENV === 'production' ? null : err.stack
+  });
+});
